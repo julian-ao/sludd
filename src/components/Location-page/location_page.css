@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
+
+.location_main {
+    background-color: white;
+    color: #6D6D6D;
+    font-family: 'Work Sans', sans-serif;
+    padding: 1rem 2rem;
+}
+
+.location_header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px #969696 solid;
+    margin-bottom: 1rem;
+}
+
+.location_header h1{
+    font-size: 2.3rem;
+    font-weight: 550;
+}
+
+.location_header_info img,
+.location_header_name img {
+    height: 100%;
+    width: 20%;
+}
+
+.location_header_info,
+.location_header_name {
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+    align-items: center;
+}
+
+.location_body table {
+    width: 100%;
+}
+
+.location_body th  {
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.location_body td {
+    text-align: center;
+    font-weight: 300;
+    font-size: 1rem;
+
+}
