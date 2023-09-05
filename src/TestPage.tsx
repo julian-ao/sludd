@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom'
 
+
+// Components
+import SearchBar from './components/SearchBar/SearchBar'
+
 const TestPage = () => {
     return (
         <>
@@ -9,9 +13,7 @@ const TestPage = () => {
                 </button>
             </Link>
             <div className="w-full h-screen flex justify-center  items-center">
-                <div className="text-center flex flex-col gap-5 w-80">
-                    <h1 className="text-4xl font-medium">Test Page</h1>
-                </div>
+                <SearchBar />
             </div>
         </>
     )

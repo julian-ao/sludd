@@ -1,0 +1,29 @@
+.searchBar {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="text"] {
+  flex: 1;
+  height: 60px;
+  padding: 10px;
+  border: none;
+  color: #333333;
+  outline: none;
+  font-size: 22px;
+}
+
+.searchButton {
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.searchButton:hover {
+  cursor: pointer;
+}
