@@ -1,16 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { Route, Routes, useNavigate } from "react-router-dom"
 import TestPage from "./TestPage";
 import Card from "./components/Card/Card";
 import LocationPage from "./pages/slug";
 
+const queryClient = new QueryClient()
+
 export default function App() {
     return (
-        <Routes>
-            <Route path="/" element={<HomeTest />} />
-            <Route path="/test" element={<TestPage />} />
-            <Route path="/:slug" element={<LocationPage/>} />
-        </Routes>
+        <QueryClientProvider client={queryClient}>
+            <Routes>
+                    <Route path="/" element={<HomeTest />} />
+                    <Route path="/test" element={<TestPage />} />
+                    <Route path="/:slug" element={<LocationPage/>} />
+            </Routes>
+        </QueryClientProvider>
     );
 }
 
