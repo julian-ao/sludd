@@ -12,7 +12,7 @@ const TestPage = () => {
                     Go back
                 </button>
             </Link>
-            <div className="w-full h-screen flex justify-center  items-center">
+            <div className="w-full h-screen flex justify-center">
                 <SearchBar />
             </div>
         </>
