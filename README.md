@@ -25,3 +25,25 @@ If you are developing a production application, we recommend updating the config
 -   Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 -   Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 -   Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Commit message template
+
+`<type>`: `<title>`
+
+Explain how the commit addresses the issue
+
+**Co-authored-by:** `<name> <email>`
+
+**Issue:** `#<issueNr>`
+
+--- COMMIT END ---
+
+The `<type>` can be one of the following:
+
+- `feat`     (new feature)
+- `fix`      (bug fix)
+- `refactor` (refactoring production code)
+- `style`    (formatting, missing semicolons, etc; no code change)
+- `docs`     (changes to documentation)
+- `test`     (adding or refactoring tests; no production code change)
+- `chore`    (updating grunt tasks, etc; no production code change)
