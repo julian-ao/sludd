@@ -20,14 +20,14 @@ const LocationComponent: FC<LocationComponentProps> = (props) => {
         return <div>Error loading data</div>;
     }
 
-    // Hent nåværende dato og tid
+    // Retrieve current date and time
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
     const currentDay = currentDate.getDate();
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
 
-    // Filtrer tidspunktene for resten av dagen
+    // Filter out the weather data for the current day
     const todaysWeather = weatherQuery.data.properties.timeseries.filter((timeSeriesItem) => {
         const date = new Date(timeSeriesItem.time);
         return date.getHours() >= currentHour+1 && 
