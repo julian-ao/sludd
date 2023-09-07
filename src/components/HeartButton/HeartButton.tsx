@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './heartbutton.css';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export type HeartButtonProps = {
     location: string;
@@ -45,7 +45,6 @@ const HeartButton = (props: HeartButtonProps) => {
                 alt='Hjerte'
             />
             <img src='../src/assets/heart-border.svg' alt='Hjerte' />
-            <Toaster />
         </div>
     );
 };
