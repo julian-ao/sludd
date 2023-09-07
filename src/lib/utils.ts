@@ -11,18 +11,18 @@ export const convertDateToReadable = (date: string) => {
 
 const getDaySuffix = (day: number) => {
     if (day >= 11 && day <= 13) {
-      return 'th';
+        return 'th';
     }
     const lastDigit = day % 10;
     switch (lastDigit) {
-      case 1:
-        return 'st';
-      case 2:
-        return 'nd';
-      case 3:
-        return 'rd';
-      default:
-        return 'th';
+        case 1:
+            return 'st';
+        case 2:
+            return 'nd';
+        case 3:
+            return 'rd';
+        default:
+            return 'th';
     }
 };
 

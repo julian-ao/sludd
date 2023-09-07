@@ -1,6 +1,7 @@
 import './location_page.css';
 import { useLocationWeatherQuery } from '../../lib/useLocationWeatherQuery';
 import { convertDateToReadable } from '../../lib/utils';
+import HeartButton from '../HeartButton/HeartButton';
 
 type LocationComponentProps = {
     locationName: string;
@@ -41,7 +42,7 @@ const LocationComponent = (props: LocationComponentProps) => {
                 Last updated {convertDateToReadable(weatherQuery.data.properties.meta.updated_at)}<br/><br/>
                 <div className='location_header'>
                     <div className='location_header_name'>
-                        <img src='../src/assets/heart.svg' alt='Hjerte'/>
+                        <HeartButton location={locationData.navn[0].stedsnavn[0].skrivemåte} />
                         <h1>{locationData.navn[0].stedsnavn[0].skrivemåte}</h1>
                     </div>
                     <div className='location_header_info'>

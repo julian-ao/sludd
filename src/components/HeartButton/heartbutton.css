@@ -1,0 +1,19 @@
+.heart_div {
+    position: relative;
+    width: 2.3rem;
+    height: 2.3rem;
+    cursor: pointer;
+}
+
+.heart_div > img {
+    position: absolute;
+}
+
+.heart_div .solid {
+    opacity: 0;
+    transition: .2s;
+}
+
+.heart_div:hover .solid {
+    opacity: 1;
+}
