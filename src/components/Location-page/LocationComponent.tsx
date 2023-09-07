@@ -1,5 +1,3 @@
-
-import { FC } from 'react';
 import './location_page.css';
 import { useLocationWeatherQuery } from '../../lib/useLocationWeatherQuery';
 
@@ -7,7 +5,7 @@ type LocationComponentProps = {
     locationName: string;
 };
 
-const LocationComponent: FC<LocationComponentProps> = (props) => {
+const LocationComponent = (props: LocationComponentProps) => {
     const { locationName } = props;
 
     const { locationData, weatherQuery } = useLocationWeatherQuery(locationName);
