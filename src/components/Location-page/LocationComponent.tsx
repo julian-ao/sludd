@@ -6,7 +6,7 @@ type LocationComponentProps = {
     locationName: string;
 };
 
-const LocationComponent = (props : LocationComponentProps) => {
+const LocationComponent = (props: LocationComponentProps) => {
     const { locationName } = props;
 
     const { locationData, weatherQuery } = useLocationWeatherQuery(locationName);
