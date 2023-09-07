@@ -31,7 +31,7 @@ const CardSkeleton: FC<CardProps> = (props) => {
                     <AnimatedWave
                         color={"white"}
                         //random number between 30 and 60
-                        animationDuration={`${Math.floor(Math.random() * (60 - 30 + 1)) + 30}s`}
+                        animationDuration={`${Math.floor(Math.random() * (40 - 20 + 1)) + 20}s`}
                         opacity={"1"}
                     />
                     <div className="description-section">
