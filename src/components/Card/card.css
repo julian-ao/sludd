@@ -23,6 +23,7 @@
     align-items: center;
     padding-left: 30px;
     padding-right: 30px;
+    padding-top: 8px;
     padding-bottom: 8px;
     text-align: left;
     background-color: white;
@@ -61,7 +62,6 @@
 
 .wave-section {
     width: 100%;
-    background-color: #ffffff;
     /* Background color behind the wave */
 }
 
@@ -93,3 +93,12 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes wave {
+    0% {
+      background-position-x: 1000px;
+    }
+    100% {
+      background-position-x: 0px;
+    }
+  }
