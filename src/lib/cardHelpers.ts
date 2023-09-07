@@ -1,53 +1,62 @@
+const weatherDescription: { [key: string]: string } = {
+    clearsky: "Clear sky",
+    fair: "Fair",
+    partlycloudy: "Partly cloudy",
+    cloudy: "Cloudy",
+    lightrainshowers: "Light rain showers",
+    rainshowers: "Rain showers",
+    heavyrainshowers: "Heavy rain showers",
+    lightrainshowersandthunder: "Light rain showers and thunder",
+    rainshowersandthunder: "Rain showers and thunder",
+    heavyrainshowersandthunder: "Heavy rain showers and thunder",
+    lightsleetshowers: "Light sleet showers",
+    sleetshowers: "Sleet showers",
+    heavysleetshowers: "Heavy sleet showers",
+    lightssleetshowersandthunder: "Light sleet showers and thunder",
+    sleetshowersandthunder: "Sleet showers and thunder",
+    heavysleetshowersandthunder: "Heavy sleet showers and thunder",
+    lightsnowshowers: "Light snow showers",
+    snowshowers: "Snow showers",
+    heavysnowshowers: "Heavy snow showers",
+    lightssnowshowersandthunder: "Light snow showers and thunder",
+    snowshowersandthunder: "Snow showers and thunder",
+    heavysnowshowersandthunder: "Heavy snow showers and thunder",
+    lightrain: "Light rain",
+    rain: "Rain",
+    heavyrain: "Heavy rain",
+    lightrainandthunder: "Light rain and thunder",
+    rainandthunder: "Rain and thunder",
+    heavyrainandthunder: "Heavy rain and thunder",
+    lightsleet: "Light sleet",
+    sleet: "Sleet",
+    heavysleet: "Heavy sleet",
+    lightsleetandthunder: "Light sleet and thunder",
+    sleetandthunder: "Sleet and thunder",
+    heavysleetandthunder: "Heavy sleet and thunder",
+    lightsnow: "Light snow",
+    snow: "Snow",
+    heavysnow: "Heavy snow",
+    lightsnowandthunder: "Light snow and thunder",
+    snowandthunder: "Snow and thunder",
+    heavysnowandthunder: "Heavy snow and thunder",
+    fog: "Fog",
+};
+
 export function parseWeatherDescription(symbol_code: string) {
-    // description can be prefixed by heavy, light, partly or none of these
-    // description can include cloudy, fair, rain, snow, sleet, fog, clearsky ++
+    const splitSymbolCode = symbol_code.split("_");
+    const description = weatherDescription[splitSymbolCode[0]];
 
-    let weatherDescription = symbol_code.replace(/_/g, " ");
-
-    weatherDescription = weatherDescription.replace(
-        /(heavy|light|partly)/g,
-        "",
-    );
-
-    weatherDescription = weatherDescription.replace(
-        /(cloudy|fair|rain|snow|sleet|fog|clearsky)/g,
-        (match) => {
-            switch (match) {
-                case "cloudy":
-                    return "cloudy";
-                case "fair":
-                    return "fair";
-                case "rain":
-                    return "rain";
-                case "snow":
-                    return "snow";
-                case "sleet":
-                    return "sleet";
-                case "fog":
-                    return "fog";
-                case "clearsky":
-                    return "clear sky";
-                default:
-                    return match;
-            }
-        },
-    );
-
-    weatherDescription =
-        weatherDescription.charAt(0).toUpperCase() +
-        weatherDescription.slice(1);
-
-    return weatherDescription;
+    return description;
 }
 
 const weatherColors = {
-    clearsky: ["#E7D097", "#E8B597", "#C8E798"],
-    fair: ["#8FA1EF", "#90E0EF", "#8FEFBE"],
-    cloudy: ["#9DCCF5", "#1C88E7", "#9DDBF5"],
-    rain: ["#812FBC", "#2F3BBB", "#2F98BC"],
-    snow: ["#41A1FA", "#5E42FA", "#42FAD8"],
-    sleet: ["#36213E", "#3F3721", "#213F37"],
-    fog: ["#5E568F", "#577590", "#568F84"],
+    clearsky: ["#EDE487", "#F6E47E", "#F6EC7E"],
+    fair: ["#8FEFBE", "#90F0AE", "#90F0CF"],
+    cloudy: ["#8C9C9A", "#8D9C8E", "#9C998C"],
+    rain: ["#8AD2EA", "#A4DCEE", "#BEE6F3"],
+    snow: ["#6E8FF5", "#6EA7F5", "#6EBEF5"],
+    sleet: ["#9FA1ED", "#AB9FEC", "#B89FED"],
+    fog: ["#5E6385", "#605E84", "#675E85"],
 };
 
 export function getColorFromWeatherDescription(symbol_code: string) {
