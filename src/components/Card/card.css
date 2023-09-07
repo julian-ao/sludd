@@ -18,15 +18,22 @@
 }
 
 .description-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding-left: 30px;
-    padding-bottom: 25px;
+    padding-right: 30px;
+    padding-bottom: 8px;
     text-align: left;
     background-color: white;
+    color: black;
+}
+
+.description-section p {
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
-    line-height: normal;
-    color: black;
+    margin: 0;
 }
 
 .text-section {

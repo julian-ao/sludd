@@ -1,6 +1,6 @@
 import { FC } from "react";
 import LocationCard from "../../Card/Card";
-import styles from "./LocationCards.module.css";
+import "./LocationCards.css";
 
 export type LocationCardsData = {
     locations: string[];
@@ -11,7 +11,7 @@ const LocationCardsView: FC<LocationCardsData> = (props) => {
 
 
     return (
-        <div className={styles.locationsGrid}>
+        <div className="locationsGrid">
             {locations.map((location) => (
                 <LocationCard location={location} key={location} />
             ))}

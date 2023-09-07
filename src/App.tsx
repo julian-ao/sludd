@@ -14,7 +14,7 @@ export default function App() {
 function HomeTest() {
     return (
         <>
-            <LocationCardsView locations={["Sandefjord", "Bergen", "Trondheim", "Trondheim sentrum", "Bærum"]} />
+            <LocationCardsView locations={["Sandefjord", "harstad", "Trondheim", "Trondheim sentrum", "Bærum", "Moss", "elverum", "tromsø"]} />
         </>
     );
 }
