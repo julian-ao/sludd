@@ -13,6 +13,9 @@
 .location_content {
     width: 90%;
     max-width: 1000px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 5rem;
 }
 
 .location_header {
@@ -64,6 +67,14 @@
 .wind_icon {
     height: 1rem;
     margin-left: 0.5rem;
+}
+
+.positive-temperature {
+    color: #F58C8C;
+}
+
+.negative-temperature {
+    color: #6885f8;
 }
 
 @media (max-width: 1250px) {

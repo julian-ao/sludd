@@ -46,7 +46,13 @@ const LocationComponent = (props: LocationComponentProps) => {
                         <h1>{locationData.navn[0].stedsnavn[0].skrivemåte}</h1>
                     </div>
                     <div className='location_header_info'>
-                        <h1>{weatherQuery.data.properties.timeseries[2].data.instant.details.air_temperature}°C</h1>
+                        <h1 className={
+                            weatherQuery.data.properties.timeseries[2].data.instant.details.air_temperature > 0
+                                ? 'positive-temperature'
+                                : 'negative-temperature'
+                        }>
+                            {weatherQuery.data.properties.timeseries[2].data.instant.details.air_temperature}°C
+                        </h1>
                         <h1>{weatherQuery.data.properties.timeseries[1].data.next_1_hours.summary.symbol_code}</h1>
                     </div>
                 </div>
@@ -70,13 +76,15 @@ const LocationComponent = (props: LocationComponentProps) => {
                                     </td>
                                     <td>{weather.data.next_1_hours?.summary.symbol_code || 'N/A'}</td>
 
-                                    <td style={{
-                                        color: weather.data.instant.details.air_temperature > 0 ? '#F58C8C' : 'blue',
-                                    }}>
-                                    {weather.data.instant.details.air_temperature || 'N/A'}°C
+                                    <td className={
+                                        weather.data.instant.details.air_temperature > 0
+                                            ? 'positive-temperature'
+                                            : 'negative-temperature'
+                                    }>
+                                        {weather.data.instant.details.air_temperature || 'N/A'}°C
                                     </td>
 
-                                    <td>{weather.data.next_1_hours?.details.precipitation_amount } mm</td>
+                                    <td className='negative-temperature'>{weather.data.next_1_hours?.details.precipitation_amount } mm</td>
                                     <td className='hidden_column'>
                                         {weather.data.instant.details.wind_speed || 'N/A'} m/s
                                         <svg
