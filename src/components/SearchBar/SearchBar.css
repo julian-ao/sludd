@@ -12,6 +12,7 @@
   width: 50%;
   display: flex;
   align-items: center;
+  padding-left: 10px;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -20,16 +21,16 @@
 input[type="text"] {
   flex: 1;
   height: 50px;
-  padding-left: 20px;
+  padding-left: 10px;
   border: none;
-  color: #333333;
+  color: #666;
   outline: none;
   font-size: 20px;
 }
 
 .searchDropdown {
   width: 50%;
-  max-height: 280px;
+  max-height: 350px;
   display: flex;
   flex-direction: column;
   background-color: #fff;
@@ -41,13 +42,19 @@ input[type="text"] {
 
 .searchDropdownItem {
   width: 100%;
-  height: 40px;
+  height: 45px;
   display: flex;
   align-items: center;
-  color: black;
-  padding-left: 20px;
+  color: #666;
+  padding-left: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+.dropdownTextDiv {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
 }
 
 .selectedDropdownItem {

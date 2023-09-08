@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom'
 import SearchBar from './components/SearchBar/SearchBar'
 
 const TestPage = () => {
+
+    function handleSearchForPlaces(searchTerm: string) {
+        console.log('Searching for:', searchTerm);
+    }
+    
     return (
         <>
             <Link to="/">
@@ -13,7 +18,7 @@ const TestPage = () => {
                 </button>
             </Link>
             <div className="w-full h-screen flex justify-center">
-                <SearchBar />
+                <SearchBar onSearch={handleSearchForPlaces} />
             </div>
         </>
     )
