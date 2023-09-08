@@ -1,6 +1,6 @@
 import { FC } from "react";
 import "./LocationCards.css";
-import LocationCard from "../../Card/LocationCard";
+import LocationCard from "../../molecules/Card/LocationCard";
 
 export type LocationCardsData = {
     locations: string[];

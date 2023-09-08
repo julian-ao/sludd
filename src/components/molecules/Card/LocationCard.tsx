@@ -1,6 +1,6 @@
 import './Card.css';
-import { useLocationWeatherQuery } from '../../lib/useLocationWeatherQuery';
-import { getColorFromWeatherDescription, parseWeatherDescription } from '../../lib/cardHelpers';
+import { useLocationWeatherQuery } from '../../../lib/useLocationWeatherQuery';
+import { getColorFromWeatherDescription, parseWeatherDescription } from '../../../lib/cardHelpers';
 import CardSkeleton from './CardSkeleton';
 
 

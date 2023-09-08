@@ -1,7 +1,7 @@
 import { FC } from "react";
-import WeatherIcon from "../atoms/icons/WeatherIcon";
+import WeatherIcon from "../../atoms/icons/WeatherIcon";
 import './Card.css';
-import AnimatedWave from "../views/LocationCardsView/Wave";
+import AnimatedWave from "./Wave";
 
 type CardProps = {
     weatherColor?: string;
@@ -32,15 +32,12 @@ const CardSkeleton: FC<CardProps> = (props) => {
                 <div className="wave-section" style={{ backgroundColor: weatherColor || 'black' }}>
                     <AnimatedWave
                         color={"white"}
-                        //random number between 30 and 60
                         animationDuration={`${Math.floor(Math.random() * (30 - 15 + 1)) + 15}s`}
-                        //either left or right
                         animationDirection={Math.random() < 0.5 ? "reverse" : "normal"}
                         opacity={"1"}
                     />
                     <div className="description-section">
                         {symbol_code ? <WeatherIcon symbol_code={symbol_code} /> :
-                            //spinning loading icon
                             <div className="loading"></div>
                         }
                         <p>{weatherDescription || 'Loading...'}</p>
