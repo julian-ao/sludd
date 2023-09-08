@@ -24,16 +24,12 @@ const LocationComponent = (props: LocationComponentProps) => {
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
     const currentDay = currentDate.getDate();
-    const currentMonth = currentDate.getMonth();
-    const currentYear = currentDate.getFullYear();
 
     // Filter out the weather data for the current day
     const todaysWeather = weatherQuery.data.properties.timeseries.filter((timeSeriesItem) => {
         const date = new Date(timeSeriesItem.time);
         return date.getHours() >= currentHour &&
-               date.getDate() === currentDay &&
-               date.getMonth() === currentMonth &&
-               date.getFullYear() === currentYear;
+               date.getDate() === currentDay;
     });
 
     return (
@@ -69,37 +65,40 @@ const LocationComponent = (props: LocationComponentProps) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {todaysWeather.map((weather, index) => (
-                                <tr key={index}>
-                                    <td>
-                                        {new Date(weather.time).getHours() === currentHour ? 'Now' : new Date(weather.time).getHours() + ':00'}
-                                    </td>
-                                    <td>{weather.data.next_1_hours?.summary.symbol_code || 'N/A'}</td>
-
-                                    <td className={
-                                        weather.data.instant.details.air_temperature > 0
-                                            ? 'positive-temperature'
-                                            : 'negative-temperature'
-                                    }>
-                                        {weather.data.instant.details.air_temperature || 'N/A'}°C
-                                    </td>
-
-                                    <td className='negative-temperature'>{weather.data.next_1_hours?.details.precipitation_amount } mm</td>
-                                    <td className='hidden_column'>
-                                        {weather.data.instant.details.wind_speed || 'N/A'} m/s
-                                        <svg
-                                            className='wind_icon'
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 384 512"
-                                            style={{ transform: `rotate(${weather.data.instant.details.wind_from_direction}deg)` }}
-                                        >
-                                            <path fill='#6D6D6D' d="M169.4 502.6c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 402.7 224 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 370.7L86.6 329.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128z"/>
-                                        </svg>
-                                    </td>
-                                    <td className='hidden_column'>{weather.data.instant.details.relative_humidity || 'N/A'}%</td>
-                                </tr>
-                            ))}
+                            {todaysWeather.map((weather, index) => {
+                                // Adjust the index with 2 to retrieve the correct data
+                                const adjustedWeather = weatherQuery.data.properties.timeseries[index + 2];
+                                return (
+                                    <tr key={index}>
+                                        <td>
+                                            {new Date(weather.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                        </td>
+                                        <td>{adjustedWeather.data.next_1_hours?.summary.symbol_code || 'N/A'}</td>
+                                        <td className={
+                                            adjustedWeather.data.instant.details.air_temperature > 0
+                                                ? 'positive-temperature'
+                                                : 'negative-temperature'
+                                        }>
+                                            {adjustedWeather.data.instant.details.air_temperature || 'N/A'}°C
+                                        </td>
+                                        <td className='negative-temperature'>{adjustedWeather.data.next_1_hours?.details.precipitation_amount } mm</td>
+                                        <td className='hidden_column'>
+                                            {adjustedWeather.data.instant.details.wind_speed || 'N/A'} m/s
+                                            <svg
+                                                className='wind_icon'
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 384 512"
+                                                style={{ transform: `rotate(${adjustedWeather.data.instant.details.wind_from_direction}deg)` }}
+                                            >
+                                                <path fill='#6D6D6D' d="M169.4 502.6c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 402.7 224 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 370.7L86.6 329.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128z"/>
+                                            </svg>
+                                        </td>
+                                        <td className='hidden_column'>{adjustedWeather.data.instant.details.relative_humidity || 'N/A'}%</td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
+
                     </table>
                 </div>
             </div>
