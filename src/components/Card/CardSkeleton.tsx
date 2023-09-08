@@ -9,10 +9,11 @@ type CardProps = {
     locationName?: string;
     symbol_code?: string;
     weatherDescription?: string;
+    navneobjekttype?: string;
 };
 
 const CardSkeleton: FC<CardProps> = (props) => {
-    const { weatherColor, temperature, locationName, symbol_code, weatherDescription } = props;
+    const { weatherColor, temperature, locationName, symbol_code, weatherDescription, navneobjekttype } = props;
 
     return (
         <div className="card" style={{
@@ -20,9 +21,10 @@ const CardSkeleton: FC<CardProps> = (props) => {
         }}>
             <div className="card-content">
                 <div className="text-section">
-                    <h3>
+                    <h3>{navneobjekttype || ""}</h3>
+                    <h2>
                         {temperature || 0}°C
-                    </h3>
+                    </h2>
                     <p>
                         {locationName || "Loading..."}
                     </p>
@@ -31,7 +33,9 @@ const CardSkeleton: FC<CardProps> = (props) => {
                     <AnimatedWave
                         color={"white"}
                         //random number between 30 and 60
-                        animationDuration={`${Math.floor(Math.random() * (40 - 20 + 1)) + 20}s`}
+                        animationDuration={`${Math.floor(Math.random() * (30 - 15 + 1)) + 15}s`}
+                        //either left or right
+                        animationDirection={Math.random() < 0.5 ? "reverse" : "normal"}
                         opacity={"1"}
                     />
                     <div className="description-section">

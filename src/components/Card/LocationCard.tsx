@@ -19,6 +19,7 @@ const LocationCard = ({ location }: { location: string }) => {
     const symbol_code = data.next_1_hours.summary.symbol_code;
     const temperature = data.instant.details.air_temperature;
 
+
     const weatherDescription = parseWeatherDescription(symbol_code);
     const weatherColor = getColorFromWeatherDescription(symbol_code);
 
@@ -28,6 +29,7 @@ const LocationCard = ({ location }: { location: string }) => {
             temperature={temperature}
             locationName={locationData?.navn[0].stedsnavn[0].skrivemåte}
             symbol_code={symbol_code}
+            navneobjekttype={locationData?.navn[0].navneobjekttype}
             weatherDescription={weatherDescription}
         />
     );

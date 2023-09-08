@@ -11,7 +11,7 @@ export const useLocationWeatherQuery = (location: string) => {
         ["location", location],
         () =>
             fetch(
-                `https://ws.geonorge.no/stedsnavn/v1/sted?sok=${location}&utkoordsys=4258&treffPerSide=1&side=1&filtrer=navn.representasjonspunkt,navn.stedsnavn.skrivemåte`,
+                `https://ws.geonorge.no/stedsnavn/v1/sted?sok=${location}&utkoordsys=4258&treffPerSide=1&side=1&filtrer=navn.representasjonspunkt,navn.stedsnavn.skrivemåte,navn.navneobjekttype`,
             ).then((res) => res.json()),
     );
 
