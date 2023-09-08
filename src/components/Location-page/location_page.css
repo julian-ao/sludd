@@ -78,6 +78,10 @@
 }
 
 @media (max-width: 1250px) {
+    .location_content {
+        box-shadow: 0 0 0;
+    }
+
     .hidden_column {
         display: none;
     }
@@ -88,6 +92,12 @@
 }
 
 @media (max-width: 500px) {
+    .location_content {
+        padding: 2rem;
+        width: 100%;
+        border-radius: 0;
+    }
+
     .location_header h1{
         font-size: 2rem;
     }
