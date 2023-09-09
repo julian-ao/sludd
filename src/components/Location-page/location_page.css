@@ -10,12 +10,24 @@
     height: 100vh;
 }
 
+.last_updated {
+    margin: 1rem 0;
+}
+
 .location_content {
     width: 90%;
     max-width: 1000px;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
-    padding: 5rem;
+    padding: 4rem 5rem;
+}
+
+.location_header_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
 }
 
 .location_header {
@@ -88,6 +100,11 @@
     .location_header_info {
         flex-direction: row-reverse;
         justify-content: start;
+    }
+
+    .location_header_top {
+        flex-direction: column;
+        align-items: baseline;
     }
 }
 

@@ -3,6 +3,7 @@ import { useLocationWeatherQuery } from '../../lib/useLocationWeatherQuery';
 import { convertDateToReadable } from '../../lib/utils';
 import HeartButton from '../HeartButton/HeartButton';
 import WeatherIcon from '../atoms/icons/WeatherIcon';
+import BackButton from '../atoms/BackButton';
 
 type LocationComponentProps = {
     locationName: string;
@@ -10,7 +11,6 @@ type LocationComponentProps = {
 
 const LocationComponent = (props: LocationComponentProps) => {
     const { locationName } = props;
-
     const { locationData, weatherQuery } = useLocationWeatherQuery(locationName);
 
     if (weatherQuery.isLoading || !locationData) {
@@ -36,7 +36,12 @@ const LocationComponent = (props: LocationComponentProps) => {
     return (
         <div className='location_main'>
             <div className='location_content'>
-                Last updated {convertDateToReadable(weatherQuery.data.properties.meta.updated_at)}<br/><br/>
+                <div className='location_header_top'>
+                    <BackButton />
+                    <div className='last_updated'>
+                        Last updated {convertDateToReadable(weatherQuery.data.properties.meta.updated_at)}
+                    </div>
+                </div>
                 <div className='location_header'>
                     <div className='location_header_name'>
                         <HeartButton location={locationData.navn[0].stedsnavn[0].skrivemåte} />
@@ -95,14 +100,12 @@ const LocationComponent = (props: LocationComponentProps) => {
                                         <td className='negative-temperature'>{adjustedWeather.data.next_1_hours?.details.precipitation_amount } mm</td>
                                         <td className='hidden_column'>
                                             {adjustedWeather.data.instant.details.wind_speed || 'N/A'} m/s
-                                            <svg
+                                            <img
+                                                src="/src/assets/arrow.svg"
+                                                alt=""
                                                 className='wind_icon'
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 384 512"
                                                 style={{ transform: `rotate(${adjustedWeather.data.instant.details.wind_from_direction}deg)` }}
-                                            >
-                                                <path fill='#6D6D6D' d="M169.4 502.6c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 402.7 224 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 370.7L86.6 329.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128z"/>
-                                            </svg>
+                                            />
                                         </td>
                                         <td className='hidden_column'>{adjustedWeather.data.instant.details.relative_humidity || 'N/A'}%</td>
                                     </tr>

@@ -7,6 +7,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: inline-block;
     font-family: sans-serif;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .card-content {
