@@ -7,11 +7,12 @@ import BackButton from '../atoms/BackButton';
 
 type LocationComponentProps = {
     locationName: string;
+    locationType: string;
 };
 
-const LocationComponent = (props: LocationComponentProps) => {
-    const { locationName } = props;
-    const { locationData, weatherQuery } = useLocationWeatherQuery(locationName);
+const LocationComponent = ({ locationName, locationType }: LocationComponentProps) => {
+    
+    const { locationData, weatherQuery } = useLocationWeatherQuery(locationName, locationType);
 
     if (weatherQuery.isLoading || !locationData) {
         return <div className='location_main'>Loading...</div>;

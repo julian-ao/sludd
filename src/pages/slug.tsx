@@ -1,9 +1,12 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import LocationComponent from '../components/Location-page/LocationComponent';
 import { useEffect } from 'react';
 
 const LocationPage = () => {
+    
     const { slug } = useParams();
+    const [searchParams] = useSearchParams();
+    const locationType = searchParams.get('locationType') || '';
 
     useEffect(() => {
         // Set the document title to the slug when the component mounts
@@ -15,7 +18,7 @@ const LocationPage = () => {
     }, [slug]);
 
     return (
-        <LocationComponent locationName={slug || ''}  />
+        <LocationComponent locationName={slug || ''} locationType={locationType || ''}  />
     );
 };
 

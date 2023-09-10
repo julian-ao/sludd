@@ -21,7 +21,7 @@ const CardSkeleton: FC<CardProps> = (props) => {
 
     const handleClick = () => {
         if (locationName) {
-            navigate(`/${locationName}`);
+            navigate(`${locationName}?locationType=${navneobjekttype}`);
         }
     };
 
