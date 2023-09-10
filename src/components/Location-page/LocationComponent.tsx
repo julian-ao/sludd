@@ -40,7 +40,7 @@ const LocationComponent = ({ locationName, locationType }: LocationComponentProp
                 <div className='location_header_top'>
                     <BackButton />
                     <div className='last_updated'>
-                        Last updated {convertDateToReadable(weatherQuery.data.properties.meta.updated_at)}
+                        Sist oppdatert {convertDateToReadable(weatherQuery.data.properties.meta.updated_at)}
                     </div>
                 </div>
                 <div className='location_header'>
@@ -69,12 +69,12 @@ const LocationComponent = ({ locationName, locationType }: LocationComponentProp
                     <table>
                         <thead>
                             <tr>
-                                <th>Time</th>
-                                <th>Weather</th>
+                                <th>Tid</th>
+                                <th>Vær</th>
                                 <th>Temp.</th>
-                                <th>Rainfall</th>
-                                <th className='hidden_column'>Wind</th>
-                                <th className='hidden_column'>Air humidity</th>
+                                <th>Nedbør</th>
+                                <th className='hidden_column'>Vind</th>
+                                <th className='hidden_column'>Luftfuktighet</th>
                             </tr>
                         </thead>
                         <tbody>

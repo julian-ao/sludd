@@ -54,7 +54,7 @@ const SearchBar: React.FC = () => {
             closeDropDown();
             console.log("Search for: " + searchTerm);
         }
-    };
+    }
 
     // Handle search with parameter that calls onSearch function prop and close dropdown
     function handleSearchWithParam(updatedSearchTerm: string) {
@@ -63,7 +63,7 @@ const SearchBar: React.FC = () => {
         console.log("Search for: " + searchTerm);
     }
 
-    
+
     // Close dropdown and reset selectedOptionIndex
     function closeDropDown() {
         setShowDropdown(false);
@@ -90,7 +90,7 @@ const SearchBar: React.FC = () => {
 
     return (
         <div className='searchContainer' ref={searchBarRef}>
-            <div 
+            <div
                 className="searchBar"
                 style={{
                     borderBottomLeftRadius: showDropdown ? 0 : '10px',
@@ -106,14 +106,14 @@ const SearchBar: React.FC = () => {
                   onKeyUp={handleKeyPress}
                 />
                 <button onClick={handleSearch} className='searchButton'>
-                    <FaSearch size={25} color="#999" /> 
+                    <FaSearch size={25} color="#999" />
                 </button>
             </div>
             {showDropdown && data && (
                 <div className='searchDropdown'>
                     {data.navn.map((item: any, index: number) => (
-                        <div 
-                          className={`searchDropdownItem ${index === selectedOptionIndex ? 'selectedDropdownItem' : ''}`} 
+                        <div
+                          className={`searchDropdownItem ${index === selectedOptionIndex ? 'selectedDropdownItem' : ''}`}
                           key={index}
                           onClick={() => {handleSearchWithParam(item.skrivemåte)}}
                         >

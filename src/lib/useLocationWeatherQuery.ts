@@ -11,12 +11,12 @@ export const useLocationWeatherQuery = (location: string, navneobjekttype?: stri
         ["location", location],
         () => {
             let base_url = `https://ws.geonorge.no/stedsnavn/v1/sted?sok=${location}&utkoordsys=4258&treffPerSide=1&side=1&filtrer=navn.representasjonspunkt,navn.stedsnavn.skrivemåte,navn.navneobjekttype`;
-    
+
             // Legg til 'navneobjekttype' til URL hvis den er definert
             if (navneobjekttype) {
                 base_url += `&navneobjekttype=${navneobjekttype.toLowerCase()}`;
             }
-    
+
             return fetch(base_url).then((res) => res.json());
         }
     );
