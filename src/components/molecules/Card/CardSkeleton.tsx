@@ -38,7 +38,7 @@ const CardSkeleton: FC<CardProps> = (props) => {
         >
             <div className="card-content">
                 <div className="header-section">
-                    <p className="location-text">{locationName || "Loading..."}</p>
+                    <p className="location-text">{locationName || "Laster..."}</p>
                     <p className="type-text">
                         <FontAwesomeIcon icon={faMapMarkerAlt} style={{ marginRight: "5px" }} />
                         {navneobjekttype || ""}
@@ -52,15 +52,15 @@ const CardSkeleton: FC<CardProps> = (props) => {
                         opacity={"1"}
                     />
                     <div className={`description-section ${temperatureClass}`}>
-                        {symbol_code 
-                            ? <WeatherIcon symbol_code={symbol_code} size={60} /> 
+                        {symbol_code
+                            ? <WeatherIcon symbol_code={symbol_code} size={60} />
                             : <div className="loading"></div>
                         }
                         <div style={{ display: "flex", alignItems: "center" }}>
                             <FontAwesomeIcon icon={faTemperatureThreeQuarters} style={{ marginRight: "5px" }} />
-                            {temperature 
-                                ? <p>{temperature}°C</p> 
-                                : <p style={{color: "#888"}}>Loading...</p>
+                            {temperature
+                                ? <p>{temperature}°C</p>
+                                : <p style={{color: "#888"}}>Laster...</p>
                             }
                         </div>
                     </div>

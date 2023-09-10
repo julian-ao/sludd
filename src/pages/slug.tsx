@@ -3,7 +3,7 @@ import LocationComponent from '../components/Location-page/LocationComponent';
 import { useEffect } from 'react';
 
 const LocationPage = () => {
-    
+
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
     const locationType = searchParams.get('locationType') || '';

@@ -12,7 +12,7 @@ export default function HomePage() {
   // Function to get the current time and set the greeting message and background
   const getGreeting = () => {
     const currentTime = new Date().getHours();
-    const greetings = ['God natt', 'God morgen', 'God ettermiddag', 'Good kveld'];
+    const greetings = ['God natt', 'God morgen', 'God ettermiddag', 'God kveld'];
     const greetingIndex =
       currentTime >= 4 && currentTime < 12 ? 1 :
       currentTime >= 12 && currentTime < 17 ? 2 :
