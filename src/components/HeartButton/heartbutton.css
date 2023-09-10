@@ -7,6 +7,9 @@
 
 .heart_div > img {
     position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .heart_div .solid {

@@ -1,0 +1,32 @@
+.popup {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: fit-content;
+    height: fit-content;
+    transform: translate(-50%, -150%) scale(.5); /* Start with the popup above the viewport */
+    transition: transform 0.3s ease-in-out; /* Add a transition for vertical transform */
+}
+
+.popup.show {
+    transform: translate(-50%, 0) scale(1); /* Show the popup by moving it down to its normal position */
+    pointer-events: auto; /* Enable pointer events when visible */
+}
+
+.popup-content {
+    background-color: #fff;
+    margin-top: 1rem;
+    padding: 5px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
