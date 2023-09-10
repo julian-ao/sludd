@@ -22,11 +22,11 @@ const HeartButton = (props: HeartButtonProps) => {
         if (favorited) {
             const updatedFavorites = favorites.filter((fav: string) => fav !== props.location);
             localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-            setPopupText("💔 Fjernet fra favoritter");
+            setPopupText("💔 " + props.location + " fjernet fra favoritter");
         } else {
             favorites.push(props.location);
             localStorage.setItem("favorites", JSON.stringify(favorites));
-            setPopupText("💖 Lagt til i favoritter");
+            setPopupText("💖 " + props.location + " lagt til i favoritter");
         }
 
         setFavorited(!favorited);
