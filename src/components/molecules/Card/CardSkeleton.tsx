@@ -2,6 +2,7 @@ import { FC } from "react";
 import WeatherIcon from "../../atoms/icons/WeatherIcon";
 import './Card.css';
 import AnimatedWave from "./Wave";
+import { useNavigate  } from "react-router-dom";
 
 type CardProps = {
     weatherColor?: string;
@@ -15,10 +16,23 @@ type CardProps = {
 const CardSkeleton: FC<CardProps> = (props) => {
     const { weatherColor, temperature, locationName, symbol_code, weatherDescription, navneobjekttype } = props;
 
+    // Get the history object from React Router
+    const navigate  = useNavigate();
+
+    const handleClick = () => {
+        if (locationName) {
+            navigate(`/${locationName}`);
+        }
+    };
+
     return (
-        <div className="card" style={{
-            backgroundColor: weatherColor || 'black',
-        }}>
+        <div
+            className="card"
+            style={{
+                backgroundColor: weatherColor || 'white',
+            }}
+            onClick={handleClick}
+        >
             <div className="card-content">
                 <div className="text-section">
                     <h3>{navneobjekttype || ""}</h3>
@@ -29,7 +43,7 @@ const CardSkeleton: FC<CardProps> = (props) => {
                         {locationName || "Loading..."}
                     </p>
                 </div>
-                <div className="wave-section" style={{ backgroundColor: weatherColor || 'black' }}>
+                <div className="wave-section" style={{ backgroundColor: weatherColor || 'white' }}>
                     <AnimatedWave
                         color={"white"}
                         animationDuration={`${Math.floor(Math.random() * (30 - 15 + 1)) + 15}s`}

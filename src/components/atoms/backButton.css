@@ -1,0 +1,9 @@
+.back_button {
+    height: 2rem;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.back_button:hover {
+    opacity: 0.5;
+}
