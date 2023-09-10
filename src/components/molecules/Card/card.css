@@ -1,11 +1,10 @@
 .card {
     width: 300px;
-    height: 250px;
-    border-radius: 8px;
+    height: 220px;
+    border-radius: 12px;
     overflow: hidden;
     background-color: #283618;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: sans-serif;
     cursor: pointer;
     transition: .2s;
@@ -15,11 +14,15 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
 .card-content {
     display: flex;
     flex-direction: column;
     height: 100%;
-    justify-content: space-between;
     align-items: left;
 }
 
@@ -29,51 +32,41 @@
     align-items: center;
     padding-left: 30px;
     padding-right: 30px;
-    padding-top: 8px;
     padding-bottom: 8px;
-    text-align: left;
     background-color: white;
-    color: black;
 }
 
 .description-section p {
-    font-size: 20px;
+    font-size: 22px;
     font-style: normal;
     font-weight: 500;
     margin: 0;
 }
 
-.text-section {
-    padding-left: 30px;
-    padding-top: 25px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+.positiveTemperature {
+    color: #f58c8c;
 }
 
-.text-section h2 {
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 600;
-    margin: 0;
-}
-.text-section h3 {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 4px;
+.negativeTemperature {
+    color: #6885f8;
 }
 
-.text-section p {
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+.header-section {
+    height: 140px;
+    padding: 20px;
+}
+
+.type-text {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.location-text {
+    font-size: 25px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
     margin: 0;
 }
 

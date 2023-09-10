@@ -1,6 +1,6 @@
 import './Card.css';
 import { useLocationWeatherQuery } from '../../../lib/useLocationWeatherQuery';
-import { getColorFromWeatherDescription, parseWeatherDescription } from '../../../lib/cardHelpers';
+import { getColorFromWeatherDescription } from '../../../lib/cardHelpers';
 import CardSkeleton from './CardSkeleton';
 
 
@@ -12,15 +12,13 @@ const LocationCard = ({ location }: { location: string }) => {
     }
 
     if (weatherQuery.isError) {
-        return <CardSkeleton weatherDescription="Error" locationName='Not found' />;
+        return <CardSkeleton locationName='Not found' />;
     }
 
     const data = weatherQuery.data.properties.timeseries[0].data;
     const symbol_code = data.next_1_hours.summary.symbol_code;
     const temperature = data.instant.details.air_temperature;
 
-
-    const weatherDescription = parseWeatherDescription(symbol_code);
     const weatherColor = getColorFromWeatherDescription(symbol_code);
 
     return (
@@ -30,7 +28,6 @@ const LocationCard = ({ location }: { location: string }) => {
             locationName={locationData?.navn[0].stedsnavn[0].skrivemåte}
             symbol_code={symbol_code}
             navneobjekttype={locationData?.navn[0].navneobjekttype}
-            weatherDescription={weatherDescription}
         />
     );
 };
