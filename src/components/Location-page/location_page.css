@@ -34,16 +34,11 @@
     overflow-wrap: break-word;
 }
 
-.location_header_info img,
-.location_header_name img {
-    height: 2.3rem;
-}
-
 .location_header_info,
 .location_header_name {
     display: flex;
     padding: 0 1rem;
-    gap: 1rem;
+    gap: 2rem;
     align-items: center;
 }
 
@@ -89,6 +84,11 @@
         flex-direction: column;
         gap: 1rem;
     }
+
+    .location_header_info {
+        flex-direction: row-reverse;
+        justify-content: start;
+    }
 }
 
 @media (max-width: 500px) {
@@ -100,10 +100,5 @@
 
     .location_header h1{
         font-size: 2rem;
-    }
-
-    .location_header_info img,
-    .location_header_name img {
-        height: 2rem;
     }
 }

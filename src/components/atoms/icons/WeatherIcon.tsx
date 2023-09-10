@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
-const WeatherIcon = ({ symbol_code }: { symbol_code: string }) => {
+type WeatherIconProps = {
+    symbol_code: string;
+    size?: number;
+};
+
+const WeatherIcon = ({ symbol_code, size }: WeatherIconProps) => {
 
     const [weatherIcon, setWeatherIcon] = useState<string>();
 
@@ -14,9 +19,8 @@ const WeatherIcon = ({ symbol_code }: { symbol_code: string }) => {
         })();
     }, [symbol_code]);
 
-
     return (
-        <img src={weatherIcon} alt={symbol_code} height={40} width={40} />
+        <img src={weatherIcon} alt={symbol_code} height={size ? size : 40} width={size ? size : 40} />
     );
 }
 

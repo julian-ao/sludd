@@ -2,6 +2,7 @@ import './location_page.css';
 import { useLocationWeatherQuery } from '../../lib/useLocationWeatherQuery';
 import { convertDateToReadable } from '../../lib/utils';
 import HeartButton from '../HeartButton/HeartButton';
+import WeatherIcon from '../atoms/icons/WeatherIcon';
 
 type LocationComponentProps = {
     locationName: string;
@@ -49,7 +50,13 @@ const LocationComponent = (props: LocationComponentProps) => {
                         }>
                             {weatherQuery.data.properties.timeseries[2].data.instant.details.air_temperature}°C
                         </h1>
-                        <h1>{weatherQuery.data.properties.timeseries[1].data.next_1_hours.summary.symbol_code}</h1>
+                        {
+                            weatherQuery.data.properties.timeseries[1].data.next_1_hours.summary.symbol_code
+                                && <WeatherIcon
+                                    symbol_code={weatherQuery.data.properties.timeseries[1].data.next_1_hours.summary.symbol_code}
+                                    size={60}
+                                    />
+                        }
                     </div>
                 </div>
                 <div className='location_body'>
@@ -73,7 +80,11 @@ const LocationComponent = (props: LocationComponentProps) => {
                                         <td>
                                             {new Date(weather.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                         </td>
-                                        <td>{adjustedWeather.data.next_1_hours?.summary.symbol_code || 'N/A'}</td>
+                                        <td>{
+                                            weather.data.next_1_hours.summary.symbol_code
+                                                ? <WeatherIcon symbol_code={weather.data.next_1_hours.summary.symbol_code} />
+                                                : <div className="loading"></div>}
+                                            </td>
                                         <td className={
                                             adjustedWeather.data.instant.details.air_temperature > 0
                                                 ? 'positive-temperature'
