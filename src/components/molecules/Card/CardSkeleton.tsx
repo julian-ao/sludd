@@ -2,6 +2,8 @@ import { FC } from "react";
 import WeatherIcon from "../../atoms/icons/WeatherIcon";
 import './Card.css';
 import AnimatedWave from "./Wave";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTemperatureThreeQuarters, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate  } from "react-router-dom";
 
 type CardProps = {
@@ -9,12 +11,13 @@ type CardProps = {
     temperature?: number;
     locationName?: string;
     symbol_code?: string;
-    weatherDescription?: string;
     navneobjekttype?: string;
 };
 
+
 const CardSkeleton: FC<CardProps> = (props) => {
-    const { weatherColor, temperature, locationName, symbol_code, weatherDescription, navneobjekttype } = props;
+    const { weatherColor, temperature, locationName, symbol_code, navneobjekttype } = props;
+    const temperatureClass = temperature && temperature < 0 ? 'negative-temperature' : 'positive-temperature';
 
     // Get the history object from React Router
     const navigate  = useNavigate();
@@ -34,13 +37,11 @@ const CardSkeleton: FC<CardProps> = (props) => {
             onClick={handleClick}
         >
             <div className="card-content">
-                <div className="text-section">
-                    <h3>{navneobjekttype || ""}</h3>
-                    <h2>
-                        {temperature || 0}°C
-                    </h2>
-                    <p>
-                        {locationName || "Loading..."}
+                <div className="header-section">
+                    <p className="location-text">{locationName || "Loading..."}</p>
+                    <p className="type-text">
+                        <FontAwesomeIcon icon={faMapMarkerAlt} style={{ marginRight: "5px" }} />
+                        {navneobjekttype || ""}
                     </p>
                 </div>
                 <div className="wave-section" style={{ backgroundColor: weatherColor || 'white' }}>
@@ -50,11 +51,18 @@ const CardSkeleton: FC<CardProps> = (props) => {
                         animationDirection={Math.random() < 0.5 ? "reverse" : "normal"}
                         opacity={"1"}
                     />
-                    <div className="description-section">
-                        {symbol_code ? <WeatherIcon symbol_code={symbol_code} /> :
-                            <div className="loading"></div>
+                    <div className={`description-section ${temperatureClass}`}>
+                        {symbol_code 
+                            ? <WeatherIcon symbol_code={symbol_code} size={60} /> 
+                            : <div className="loading"></div>
                         }
-                        <p>{weatherDescription || 'Loading...'}</p>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                            <FontAwesomeIcon icon={faTemperatureThreeQuarters} style={{ marginRight: "5px" }} />
+                            {temperature 
+                                ? <p>{temperature}°C</p> 
+                                : <p style={{color: "#888"}}>Loading...</p>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

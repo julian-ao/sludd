@@ -3,17 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 import './SearchBar.css';
 
-interface SearchBarProps {
-    onSearch: (searchTerm:string) => void; 
-}
-
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+const SearchBar: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const [selectedOptionIndex, setSelectedOptionIndex] = useState<number>(-1);
     const [lastKeyPressed, setLastKeyPressed] = useState<string>('');
-    const [isSearching, setIsSearching] = useState<boolean>(false);
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const searchBarRef = useRef<HTMLDivElement | null>(null);
 
 
     // Fetch data from API with searchTerm and fuzzy search = true
@@ -26,12 +21,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     });
 
     // Fetch data from API and showDropdown when searchTerm changes
-    // If lastKeyPressed ArrowUp, ArrowDown or Enter
     useEffect(() => {
-        if (!isSearching && searchTerm.trim() !== '') {
-            if (!['ArrowUp', 'ArrowDown'].includes(lastKeyPressed)) {
-                refetch();
-                setShowDropdown(true);
+        if (searchTerm.trim() !== '') {0
+            if (!['ArrowUp', 'ArrowDown', 'Enter'].includes(lastKeyPressed)) {
+                refetch().then(() => setShowDropdown(true));
             }
         } else {
             setShowDropdown(false);
@@ -42,7 +35,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     // Detect clicks outside of the dropdown and close it
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+            if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
                 closeDropDown();
             }
         };
@@ -58,17 +51,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         if (searchTerm.trim() === '') {
            alert("Mostl likely not a valid place in Norway")
         } else {
-            setIsSearching(true);
-            onSearch(searchTerm);
             closeDropDown();
-            setIsSearching(false)
+            console.log("Search for: " + searchTerm);
         }
     };
 
     // Handle search with parameter that calls onSearch function prop and close dropdown
     function handleSearchWithParam(updatedSearchTerm: string) {
-        onSearch(updatedSearchTerm);
+        setSearchTerm(updatedSearchTerm)
         closeDropDown();
+        console.log("Search for: " + searchTerm);
     }
 
     
@@ -97,35 +89,38 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
 
     return (
-        <div className='searchContainer'>
-            <div className="searchBar">
-                <FaMapMarkerAlt size={18} color="gray" />
+        <div className='searchContainer' ref={searchBarRef}>
+            <div 
+                className="searchBar"
+                style={{
+                    borderBottomLeftRadius: showDropdown ? 0 : '10px',
+                    borderBottomRightRadius: showDropdown ? 0 : '10px'
+                }}
+            >
+                <FaMapMarkerAlt size={18} color="#999" style={{paddingLeft: "10px"}} />
                 <input
                   type="text"
-                  placeholder="Search for a place in Norway..."
+                  placeholder="Søk på et sted i Norge..."
                   value={searchTerm}
                   onChange={(event) => setSearchTerm(event.target.value)}
                   onKeyUp={handleKeyPress}
                 />
                 <button onClick={handleSearch} className='searchButton'>
-                    <FaSearch size={25} color="gray" /> 
+                    <FaSearch size={25} color="#999" /> 
                 </button>
             </div>
             {showDropdown && data && (
-                <div className='searchDropdown' ref={dropdownRef}>
+                <div className='searchDropdown'>
                     {data.navn.map((item: any, index: number) => (
                         <div 
                           className={`searchDropdownItem ${index === selectedOptionIndex ? 'selectedDropdownItem' : ''}`} 
                           key={index}
-                          onClick={() => {
-                            setSearchTerm(item.skrivemåte);
-                            handleSearchWithParam(item.skrivemåte);
-                          }}
+                          onClick={() => {handleSearchWithParam(item.skrivemåte)}}
                         >
-                            <FaMapMarkerAlt size={18} color="gray" />
+                            <FaMapMarkerAlt size={18} color="#999" style={{paddingLeft: "10px"}} />
                             <div className='dropdownTextDiv'>
-                                <h4>{item.skrivemåte}</h4>
-                                <p style={{fontSize: "11px"}}>{item.navneobjekttype}</p>
+                                <h3>{item.skrivemåte}</h3>
+                                <p>{item.navneobjekttype}, {item.kommuner[0].kommunenavn}</p>
                             </div>
                         </div>
                     ))}
