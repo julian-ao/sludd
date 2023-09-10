@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './heartbutton.css';
+import Popup from '../atoms/popup/Popup';
 
 export type HeartButtonProps = {
     location: string;
@@ -7,37 +8,51 @@ export type HeartButtonProps = {
 
 const HeartButton = (props: HeartButtonProps) => {
     const [favorited, setFavorited] = useState(() => {
-        // Check if the location is in local storage and return true if it is, false otherwise
         const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
         return favorites.includes(props.location);
     });
 
+    const [isPopupShown, setIsPopupShown] = useState(false);
+
+    const [popupText, setPopupText] = useState<string>();
+
     const toggleFavorite = () => {
-        // Get the current favorites from local storage or initialize an empty array if it doesn't exist
         const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
 
         if (favorited) {
-            // If already favorited, remove the location from the favorites array
             const updatedFavorites = favorites.filter((fav: string) => fav !== props.location);
             localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+            setPopupText("💔 Fjernet fra favoritter");
         } else {
-            // If not favorited, add the location to the favorites array
             favorites.push(props.location);
             localStorage.setItem("favorites", JSON.stringify(favorites));
+            setPopupText("💖 Lagt til i favoritter");
         }
 
         setFavorited(!favorited);
+        showPopup();
+    };
+
+    const showPopup = () => {
+        setIsPopupShown(true);
+
+        setTimeout(() => {
+            setIsPopupShown(false);
+        }, 1500);
     };
 
     return (
-        <div className='heart_div' onClick={toggleFavorite}>
-            <img
-                className='solid'
-                style={favorited ? { opacity: 1 } : {}}
-                src='../src/assets/heart-solid.svg'
-                alt='Hjerte'
-            />
-            <img src='../src/assets/heart-border.svg' alt='Hjerte' />
+        <div>
+            <div className='heart_div' onClick={toggleFavorite}>
+                <img
+                    className='solid'
+                    style={favorited ? { opacity: 1 } : {}}
+                    src='../src/assets/heart-solid.svg'
+                    alt='Hjerte'
+                />
+                <img src='../src/assets/heart-border.svg' alt='Hjerte' />
+            </div>
+            <Popup text={popupText || ''} show={isPopupShown} />
         </div>
     );
 };
