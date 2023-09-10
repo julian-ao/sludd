@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './heartbutton.css';
-import toast from 'react-hot-toast';
 
 export type HeartButtonProps = {
     location: string;
@@ -21,16 +20,10 @@ const HeartButton = (props: HeartButtonProps) => {
             // If already favorited, remove the location from the favorites array
             const updatedFavorites = favorites.filter((fav: string) => fav !== props.location);
             localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-            toast('Removed from favorites', {
-                icon: '💔',
-            });
         } else {
             // If not favorited, add the location to the favorites array
             favorites.push(props.location);
             localStorage.setItem("favorites", JSON.stringify(favorites));
-            toast('Added to favorites', {
-                icon: '💖',
-            });
         }
 
         setFavorited(!favorited);
