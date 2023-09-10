@@ -2,17 +2,23 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { LocationQueryData, WeatherQueryData } from "./types";
 
-export const useLocationWeatherQuery = (location: string) => {
+export const useLocationWeatherQuery = (location: string, navneobjekttype?: string, filter?: string) => {
     const [locationData, setLocationData] = useState<LocationQueryData | null>(
         null,
     );
 
     const locationQuery = useQuery<LocationQueryData, unknown>(
         ["location", location],
-        () =>
-            fetch(
-                `https://ws.geonorge.no/stedsnavn/v1/sted?sok=${location}&utkoordsys=4258&treffPerSide=1&side=1&filtrer=navn.representasjonspunkt,navn.stedsnavn.skrivemåte,navn.navneobjekttype`,
-            ).then((res) => res.json()),
+        () => {
+            let base_url = `https://ws.geonorge.no/stedsnavn/v1/sted?sok=${location}&utkoordsys=4258&treffPerSide=1&side=1&filtrer=navn.representasjonspunkt,navn.stedsnavn.skrivemåte,navn.navneobjekttype`;
+    
+            // Legg til 'navneobjekttype' til URL hvis den er definert
+            if (navneobjekttype) {
+                base_url += `&navneobjekttype=${navneobjekttype.toLowerCase()}`;
+            }
+    
+            return fetch(base_url).then((res) => res.json());
+        }
     );
 
     useEffect(() => {
@@ -34,3 +40,5 @@ export const useLocationWeatherQuery = (location: string) => {
 
     return { locationData, weatherQuery };
 };
+
+
