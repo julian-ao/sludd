@@ -7,13 +7,16 @@ import BackButton from '../atoms/BackButton';
 
 type LocationComponentProps = {
     locationName: string;
-    locationType: string;
+    locationId?: string;
 };
 
-const LocationComponent = ({ locationName, locationType }: LocationComponentProps) => {
-    
-    const { locationData, weatherQuery } = useLocationWeatherQuery(locationName, locationType);
+const LocationComponent = ({ locationName, locationId }: LocationComponentProps) => {
 
+    console.log('locationId', locationId);
+    //if locationId is undefined, use locationName to get location weather data
+    //if locationId is defined, use locationId to get location weather data
+
+    const { locationData, weatherQuery } = useLocationWeatherQuery({ locationName: locationName, locationId: locationId });
     if (weatherQuery.isLoading || !locationData) {
         return <div className='location_main'>Loading...</div>;
     }
@@ -31,7 +34,7 @@ const LocationComponent = ({ locationName, locationType }: LocationComponentProp
     const todaysWeather = weatherQuery.data.properties.timeseries.filter((timeSeriesItem) => {
         const date = new Date(timeSeriesItem.time);
         return date.getHours() >= currentHour &&
-               date.getDate() === currentDay;
+            date.getDate() === currentDay;
     });
 
     return (
@@ -58,10 +61,10 @@ const LocationComponent = ({ locationName, locationType }: LocationComponentProp
                         </h1>
                         {
                             weatherQuery.data.properties.timeseries[1].data.next_1_hours.summary.symbol_code
-                                && <WeatherIcon
-                                    symbol_code={weatherQuery.data.properties.timeseries[1].data.next_1_hours.summary.symbol_code}
-                                    size={60}
-                                    />
+                            && <WeatherIcon
+                                symbol_code={weatherQuery.data.properties.timeseries[1].data.next_1_hours.summary.symbol_code}
+                                size={60}
+                            />
                         }
                     </div>
                 </div>
@@ -90,7 +93,7 @@ const LocationComponent = ({ locationName, locationType }: LocationComponentProp
                                             weather.data.next_1_hours.summary.symbol_code
                                                 ? <WeatherIcon symbol_code={weather.data.next_1_hours.summary.symbol_code} />
                                                 : <div className="loading"></div>}
-                                            </td>
+                                        </td>
                                         <td className={
                                             adjustedWeather.data.instant.details.air_temperature > 0
                                                 ? 'positive-temperature'
@@ -98,7 +101,7 @@ const LocationComponent = ({ locationName, locationType }: LocationComponentProp
                                         }>
                                             {adjustedWeather.data.instant.details.air_temperature || 'N/A'}°C
                                         </td>
-                                        <td className='negative-temperature'>{adjustedWeather.data.next_1_hours?.details.precipitation_amount } mm</td>
+                                        <td className='negative-temperature'>{adjustedWeather.data.next_1_hours?.details.precipitation_amount} mm</td>
                                         <td className='hidden_column'>
                                             {adjustedWeather.data.instant.details.wind_speed || 'N/A'} m/s
                                             <img
