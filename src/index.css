@@ -4,4 +4,7 @@ body {
     font-family: 'Work Sans', sans-serif;
     margin: 0;
     overflow-x: hidden;
+    background: linear-gradient(to bottom, #87CEEB, #FFFFFF, #FFFFFF);
+    background-size: cover; 
+    background-repeat: no-repeat;
 }

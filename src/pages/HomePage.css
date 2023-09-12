@@ -1,7 +1,4 @@
 .homePageContainer {
-  background: linear-gradient(to bottom, #87CEEB, #FFFFFF, #FFFFFF);
-  background-size: cover; 
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
