@@ -8,6 +8,20 @@
     margin-bottom: 80px;
 }
 
+/* Mobile-view */
+@media screen and (max-width: 600px) {
+    .searchContainer {
+        width: 80%;
+    }
+}
+
+/* Tablet-view */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    .searchContainer {
+        width: 60%;
+    }
+}
+
 .searchBar {
     width: 100%;
     display: flex;

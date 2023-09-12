@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100%;
   width: 100vw;
   padding-top: 80px;
   padding-bottom: 200px;
@@ -17,4 +17,16 @@
     color: white;
     margin-bottom: 20px;
     font-weight: 700;
+}
+
+/* Mobile-view */
+@media screen and (max-width: 600px) {
+  .homePageContainer {
+    padding-top: 30px;
+  }
+
+  .greetingHeader {
+      font-size: 40px; /* Juster denne verdien etter behov */
+      text-align: center !important; /* Dette vil sikre at teksten alltid er midtstilt, selv om en annen stil prøver å overstyre den */
+  }
 }
