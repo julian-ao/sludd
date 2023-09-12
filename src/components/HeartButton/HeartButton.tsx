@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './heartbutton.css';
 import Popup from '../atoms/popup/Popup';
+import solidHeart from '../../assets/heart-solid.svg';
+import borderHeart from '../../assets/heart-border.svg';
 
 export type HeartButtonProps = {
     location: string;
@@ -47,10 +49,10 @@ const HeartButton = (props: HeartButtonProps) => {
                 <img
                     className='solid'
                     style={favorited ? { opacity: 1 } : {}}
-                    src='../src/assets/heart-solid.svg'
+                    src={solidHeart}
                     alt='Hjerte'
                 />
-                <img src='../src/assets/heart-border.svg' alt='Hjerte' />
+                <img src={borderHeart} alt='Hjerte' />
             </div>
             <Popup text={popupText || ''} show={isPopupShown} />
         </div>

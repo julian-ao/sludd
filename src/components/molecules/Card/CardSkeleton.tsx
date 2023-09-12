@@ -4,7 +4,7 @@ import './Card.css';
 import AnimatedWave from "./Wave";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTemperatureThreeQuarters, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type CardProps = {
     weatherColor?: string;
@@ -12,19 +12,20 @@ type CardProps = {
     locationName?: string;
     symbol_code?: string;
     navneobjekttype?: string;
+    locationId?: number;
 };
 
 
 const CardSkeleton: FC<CardProps> = (props) => {
-    const { weatherColor, temperature, locationName, symbol_code, navneobjekttype } = props;
+    const { weatherColor, temperature, locationName, symbol_code, navneobjekttype, locationId } = props;
     const temperatureClass = temperature && temperature < 0 ? 'negative-temperature' : 'positive-temperature';
 
     // Get the history object from React Router
-    const navigate  = useNavigate();
+    const navigate = useNavigate();
 
     const handleClick = () => {
         if (locationName) {
-            navigate(`${locationName}?locationType=${navneobjekttype}`);
+            navigate(`/location/${locationName}/${locationId!}`);
         }
     };
 
@@ -60,7 +61,7 @@ const CardSkeleton: FC<CardProps> = (props) => {
                             <FontAwesomeIcon icon={faTemperatureThreeQuarters} style={{ marginRight: "5px" }} />
                             {temperature
                                 ? <p>{temperature}°C</p>
-                                : <p style={{color: "#888"}}>Laster...</p>
+                                : <p style={{ color: "#888" }}>Laster...</p>
                             }
                         </div>
                     </div>

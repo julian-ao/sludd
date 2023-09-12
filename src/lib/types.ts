@@ -7,7 +7,12 @@ export type LocationQueryData = {
         stedsnavn: {
             skrivemåte: string;
         }[];
+        stedsnummer: number;
         navneobjekttype: string;
+        kommuner?: {
+            kommunenummer: string;
+            kommunenavn: string;
+        }[];
     }[];
 };
 

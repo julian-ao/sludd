@@ -3,16 +3,16 @@ import "./LocationCards.css";
 import LocationCard from "../../molecules/Card/LocationCard";
 
 export type LocationCardsData = {
-    locations: string[];
+    locationIds: string[];
 };
 
 const LocationCardsView: FC<LocationCardsData> = (props) => {
-    const { locations } = props;
+    const { locationIds } = props;
 
 
     return (
         <div className="locationsGrid">
-            {locations.map((location) => (
+            {locationIds.map((location) => (
                 <LocationCard location={location} key={location} />
             ))}
         </div>

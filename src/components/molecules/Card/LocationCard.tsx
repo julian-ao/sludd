@@ -5,7 +5,7 @@ import CardSkeleton from './CardSkeleton';
 
 
 const LocationCard = ({ location }: { location: string }) => {
-    const { locationData, weatherQuery } = useLocationWeatherQuery(location);
+    const { locationData, weatherQuery } = useLocationWeatherQuery({ locationId: location });
 
     if (weatherQuery.isLoading || !locationData) {
         return <CardSkeleton />;
@@ -26,6 +26,7 @@ const LocationCard = ({ location }: { location: string }) => {
             weatherColor={weatherColor}
             temperature={temperature}
             locationName={locationData?.navn[0].stedsnavn[0].skrivemåte}
+            locationId={locationData?.navn[0].stedsnummer}
             symbol_code={symbol_code}
             navneobjekttype={locationData?.navn[0].navneobjekttype}
         />
