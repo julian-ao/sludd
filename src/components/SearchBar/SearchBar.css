@@ -1,93 +1,101 @@
 .searchContainer {
-  width: 40%;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  position: relative;
-  margin-bottom: 80px;
+    width: 40%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 80px;
 }
 
 .searchBar {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
 }
 
 input[type="text"] {
-  flex: 1;
-  height: 60px;
-  padding-left: 10px;
-  border: none;
-  outline: none;
-  font-size: 20px;
-  color: #777;
+    flex: 1;
+    height: 60px;
+    padding-left: 10px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    color: #777;
 }
 
 input[type="text"]::placeholder {
-  color: #C7C7C7;
+    color: #C7C7C7;
 }
 
 .searchDropdown {
-  width: 100%;
-  max-height: 350px;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  border-top: 1px solid #C7C7C7;
-  position: absolute;
-  top: 60px;
-  z-index: 1;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+    width: 100%;
+    max-height: 350px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-top: 1px solid #C7C7C7;
+    position: absolute;
+    overflow: hidden;
+    top: 60px;
+    z-index: 1;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
-.searchDropdownItem {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  color: #888;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+
 
 .dropdownTextDiv {
-  display: flex;
-  flex-direction: column;
-  margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 12px;
 }
 
 .dropdownTextDiv h3 {
-  margin: 0;
-  margin-bottom: 1px;
-  font-weight: 300;
+    margin: 0;
+    margin-bottom: 1px;
+    font-weight: 300;
 }
 
 .dropdownTextDiv p {
-  margin: 0;
-  font-size: 12px;
+    margin: 0;
+    font-size: 12px;
 }
 
-.selectedDropdownItem {
-  background-color: #ddd;
+.searchDropdownItem {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    color: #888;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+.searchDropdownItem:focus {
+    outline: none;
+    background-color: #ddd;
 }
 
 .searchDropdownItem:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 .searchButton {
-  border: none;
-  margin-right: 10px;
-  background-color: transparent;
-  cursor: pointer;
-  transition: background-color 0.3s;
+    border: none;
+    margin-right: 10px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .searchButton:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
-
