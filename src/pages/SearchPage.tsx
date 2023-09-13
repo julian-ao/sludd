@@ -1,7 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import SearchBar, { API_URL } from '../components/SearchBar/SearchBar';
+import SearchBar from '../components/SearchBar/SearchBar';
 import LocationCardsView from '../components/views/LocationCardsView/LocationCardsView';
 import { LocationQueryData } from '../lib/types';
 
@@ -9,31 +8,27 @@ const SearchPage = () => {
 
     const [searchParams] = useSearchParams();
     const searchTerm = searchParams.get('q') || undefined;
-    const [locationIds, setLocationIds] = useState<string[]>([]);
 
-    const searchUrl = `${API_URL}?sok=${searchTerm}&fuzzy=true&utkoordsys=4258&treffPerSide=15&side=1`;
-    console.log(searchUrl);
-    useQuery<LocationQueryData, unknown>({
+    const filter = "navn.representasjonspunkt,navn.stedsnavn.skrivemåte,navn.navneobjekttype,navn.stedsnummer,navn.kommuner"
+
+    const { data, isLoading } = useQuery<LocationQueryData>({
         queryKey: ["locationData", searchTerm],
-        queryFn: () => fetch(`${API_URL}?sok=${searchTerm}&fuzzy=true&utkoordsys=4258&treffPerSide=9&side=1&filtrer=navn.stedsnummer,metadata`)
+        queryFn: () => fetch(`https://ws.geonorge.no/stedsnavn/v1/sted?sok=${searchTerm}&fuzzy=true&utkoordsys=4258&treffPerSide=9&side=1&filtrer=${filter}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error('Network response was not ok');
                 }
                 return res.json();
             }),
-        onSuccess: (data) => {
-            setLocationIds(data.navn.map((item) => item.stedsnummer.toString()))
-        }
     });
 
+    //TODO: add pagination
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px', backgroundColor: '#87CEEB' }}>
             <SearchBar />
-            <LocationCardsView locationIds={locationIds} />
+            {isLoading && <p>Loading...</p>}
+            {data && <LocationCardsView locationData={data} />}
         </div>
-
-
     );
 };
 

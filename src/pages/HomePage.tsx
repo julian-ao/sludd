@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import './HomePage.css';
 import SluddLogo from '../assets/SluddLogo.svg';
 import SearchBar from '../components/SearchBar/SearchBar';
-import LocationCardsView from '../components/views/LocationCardsView/LocationCardsView';
 
 export default function HomePage() {
     const [greeting, setGreeting] = useState('');
@@ -25,28 +24,13 @@ export default function HomePage() {
         getGreeting();
     }, []);
 
+    // TODO: show favorite locations based on location data from local storage
+
     return (
         <div className="homePageContainer">
             <img src={SluddLogo} alt="Sludd Logo" />
             <h1 className='greetingHeader'>{greeting}</h1>
             <SearchBar />
-            <LocationCardsView locationIds={[
-                '509924',
-                '307915',
-                '239083',
-                '369108',
-                '915103',
-                '1072407',
-                '997111',
-                '570647',
-                '406320',
-                '480914',
-                '911117',
-                '61929',
-                '1066023',
-                '1025564',
-                '892087'
-            ]} />
         </div>
     );
 }

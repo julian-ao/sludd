@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import LocationComponent from '../components/Location-page/LocationComponent';
 import { useEffect } from 'react';
 
@@ -6,7 +6,6 @@ const LocationPage = () => {
 
 
     const { locationName, slug } = useParams();
-    console.log(locationName, slug);
 
     useEffect(() => {
         document.title = 'Sludd - ' + locationName || 'Sludd';

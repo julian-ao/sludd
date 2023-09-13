@@ -24,8 +24,6 @@ const SearchBar: FC = () => {
             }),
     });
 
-    console.log(data);
-
     useEffect(() => {
         if (searchTerm.trim() !== '') {
             refetch().then(() => setShowDropdown(true));
@@ -60,7 +58,6 @@ const SearchBar: FC = () => {
     const handleSearchWithParam = useCallback((updatedSearchTerm: string) => {
         setSearchTerm(updatedSearchTerm);
         setShowDropdown(false);
-        console.log("Search for: " + updatedSearchTerm);
     }, []);
 
     return (
