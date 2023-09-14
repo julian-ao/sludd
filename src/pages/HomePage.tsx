@@ -4,9 +4,13 @@ import { useState, useEffect } from 'react';
 import './HomePage.css';
 import SluddLogo from '../assets/SluddLogo.svg';
 import SearchBar from '../components/SearchBar/SearchBar';
+import LocationCardsView from '../components/views/LocationCardsView/LocationCardsView';
+import { LocationData } from '../lib/types';
 
 export default function HomePage() {
     const [greeting, setGreeting] = useState('');
+
+    const [favoriteLocations, setFavoriteLocations] = useState<LocationData[]>([]);
 
     // Function to get the current time and set the greeting message and background
     const getGreeting = () => {
@@ -22,15 +26,27 @@ export default function HomePage() {
 
     useEffect(() => {
         getGreeting();
+        const favoriteLocations = localStorage.getItem('favorites');
+        favoriteLocations && setFavoriteLocations(JSON.parse(favoriteLocations));
     }, []);
-
-    // TODO: show favorite locations based on location data from local storage
 
     return (
         <div className="homePageContainer">
-            <img src={SluddLogo} alt="Sludd Logo" />
-            <h1 className='greetingHeader'>{greeting}</h1>
-            <SearchBar />
+            <div className='homePageContent'>
+                <img src={SluddLogo} alt="Sludd Logo" />
+                <h1 className='greetingHeader'>{greeting}</h1>
+                <SearchBar />
+                <div className='favoritesHeader'>
+                    Favoritter
+                </div>
+                {
+                    favoriteLocations.length === 0 ?
+                        <div className='noFavoritesText'>
+                            Du har ingen favoritter enda. Legg til en ved å søke på et sted.
+                        </div>
+                        : <LocationCardsView locationData={favoriteLocations} />
+                }
+            </div>
         </div>
     );
 }

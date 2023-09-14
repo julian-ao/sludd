@@ -27,7 +27,7 @@ const SearchPage = () => {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '6rem' }}>
             <SearchBar />
             {isLoading && <p>Loading...</p>}
-            {data && <LocationCardsView locationData={data} />}
+            {data && <LocationCardsView locationData={data.navn} />}
         </div>
     );
 };
