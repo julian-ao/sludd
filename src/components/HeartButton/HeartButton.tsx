@@ -3,15 +3,16 @@ import './heartbutton.css';
 import Popup from '../atoms/popup/Popup';
 import solidHeart from '../../assets/heart-solid.svg';
 import borderHeart from '../../assets/heart-border.svg';
+import { LocationData } from '../../lib/types';
 
 export type HeartButtonProps = {
-    location: string;
+    location: LocationData
 };
 
 const HeartButton = (props: HeartButtonProps) => {
-    const [favorited, setFavorited] = useState(() => {
+    const [favorited, setFavorited] = useState<boolean>(() => {
         const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-        return favorites.includes(props.location);
+        return favorites.map((f: LocationData) => f.stedsnummer).includes(props.location.stedsnummer);
     });
 
     const [isPopupShown, setIsPopupShown] = useState(false);
@@ -22,7 +23,7 @@ const HeartButton = (props: HeartButtonProps) => {
         const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
 
         if (favorited) {
-            const updatedFavorites = favorites.filter((fav: string) => fav !== props.location);
+            const updatedFavorites = favorites.filter((f: LocationData) => f.stedsnummer !== props.location.stedsnummer);
             localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
             setPopupText("💔 " + props.location + " fjernet fra favoritter");
         } else {

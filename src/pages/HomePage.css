@@ -1,13 +1,9 @@
 .homePageContainer {
-  background: linear-gradient(to bottom, #87CEEB, #FFFFFF, #FFFFFF);
-  background-size: cover; 
-  background-repeat: no-repeat;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  width: 100vw;
   padding-top: 80px;
   padding-bottom: 200px;
 }

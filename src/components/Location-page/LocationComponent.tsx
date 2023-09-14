@@ -48,7 +48,7 @@ const LocationComponent = ({ locationName, locationId }: LocationComponentProps)
                 </div>
                 <div className='location_header'>
                     <div className='location_header_name'>
-                        <HeartButton location={locationData.navn[0].stedsnavn[0].skrivemåte} />
+                        <HeartButton location={locationData.navn[0]} />
                         <h1>{locationData.navn[0].stedsnavn[0].skrivemåte}</h1>
                     </div>
                     <div className='location_header_info'>

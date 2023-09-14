@@ -24,7 +24,7 @@ const SearchPage = () => {
 
     //TODO: add pagination
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px', backgroundColor: '#87CEEB' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '6rem' }}>
             <SearchBar />
             {isLoading && <p>Loading...</p>}
             {data && <LocationCardsView locationData={data} />}
