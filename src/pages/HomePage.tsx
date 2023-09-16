@@ -5,7 +5,6 @@ import './HomePage.css';
 import SluddLogo from '../assets/SluddLogo.svg';
 import SearchBar from '../components/SearchBar/SearchBar';
 import LocationCardsView from '../components/views/LocationCardsView/LocationCardsView';
-import FilterSkeleton from '../components/molecules/FilterSkeleton/FilterSkeleton';
 
 export default function HomePage() {
     const [greeting, setGreeting] = useState('');
@@ -36,10 +35,6 @@ export default function HomePage() {
                 <img src={SluddLogo} alt="Sludd Logo" />
                 <h1 className='greetingHeader'>{greeting}</h1>
                 <SearchBar />
-                <div style={{ display: 'flex', gap: '3rem' }}>
-                    <FilterSkeleton title={'Filtrer'} type={'filter'} values={['By', 'Tettbebyggelse', 'Fylke', 'Elv']} />
-                    <FilterSkeleton title={'Sorter'} type={'sort'} values={['Temperatur - synkende', 'Temperatur - stigende']} />
-                </div>
                 <div className='favoritesHeader'>
                     Favoritter
                 </div>
