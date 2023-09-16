@@ -9,8 +9,8 @@ export default function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/:slug" element={<LocationPage/>} />
+                <Route path="/project1/" element={<HomePage />} />
+                <Route path="/project1/:slug" element={<LocationPage />} />
             </Routes>
         </QueryClientProvider>
     );

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { LocationQueryData, WeatherQueryData } from "./types";
 
-export const useLocationWeatherQuery = (location: string, navneobjekttype?: string, filter?: string) => {
+export const useLocationWeatherQuery = (location: string, navneobjekttype?: string, /* filter?: string */) => {
     const [locationData, setLocationData] = useState<LocationQueryData | null>(
         null,
     );
