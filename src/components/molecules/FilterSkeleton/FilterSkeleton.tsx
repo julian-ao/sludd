@@ -17,11 +17,9 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
 
         const value = event.currentTarget.value;
         if (props.currentFilters.includes(value)) {
-            // If the value is already in the checkedFilters, remove it
-            props.setFilters(props.currentFilters.filter(item => item !== value));
+            props.setFilters(props.currentFilters.filter(item => item !== value)); // remove value
         } else {
-            // If the value is not in checkedFilters, add it
-            props.setFilters([...props.currentFilters, value]);
+            props.setFilters([...props.currentFilters, value]); // add value
         }
     };
 
