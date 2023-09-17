@@ -51,6 +51,7 @@ const LocationCard: FC<LocationCardProps> = ({ locationData }) => {
             locationId={parseInt(locationData?.stedsnummer)}
             symbol_code={symbol_code}
             navneobjekttype={locationData?.navneobjekttype}
+            municipality={locationData?.kommuner?.[0].kommunenavn}
         />
     );
 };

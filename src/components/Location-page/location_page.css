@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
 
 .location_main {
-    color: #6D6D6D;
+    color: #6d6d6d;
     font-family: 'Work Sans', sans-serif;
     display: flex;
     justify-content: center;
@@ -15,7 +15,7 @@
 }
 
 .location_content {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     width: 90%;
     max-width: 1000px;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
@@ -42,8 +42,15 @@
     padding-bottom: 1rem;
 }
 
-.location_header h1{
+.location_header h1 {
     font-size: 2.3rem;
+    font-weight: 550;
+    margin: 0;
+    overflow-wrap: break-word;
+}
+
+.location_header h2 {
+    font-size: 1.5rem;
     font-weight: 550;
     margin: 0;
     overflow-wrap: break-word;
@@ -61,7 +68,7 @@
     width: 100%;
 }
 
-.location_body th  {
+.location_body th {
     font-weight: 300;
     font-size: 1.5rem;
     height: 2.5rem;
@@ -80,7 +87,7 @@
 }
 
 .positive-temperature {
-    color: #F58C8C;
+    color: #f58c8c;
 }
 
 .negative-temperature {
@@ -118,7 +125,7 @@
         border-radius: 0;
     }
 
-    .location_header h1{
+    .location_header h1 {
         font-size: 2rem;
     }
 }
