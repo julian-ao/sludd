@@ -19,6 +19,8 @@
     width: 90%;
     max-width: 1000px;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin: 60px 0px;
     border-radius: 20px;
     padding: 4rem 5rem;
 }
