@@ -4,7 +4,22 @@ export const convertDateToReadable = (date: string) => {
     const hour = date.slice(11, 13);
     const minute = date.slice(14, 16);
 
-    return `${day}. ${months[Number(month) - 1].toLocaleLowerCase()} ${hour}:${minute}`;
+    return `${day}. ${months[
+        Number(month) - 1
+    ].toLocaleLowerCase()} ${hour}:${minute}`;
 };
 
-const months = ['Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November','Desember'];
+const months = [
+    "Januar",
+    "Februar",
+    "Mars",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+];

@@ -88,6 +88,10 @@ input[type="text"]::placeholder {
     background-color: #ddd;
 }
 
+.selectedDropdownItem {
+    background-color: #ddd;
+}
+
 .searchButton {
     border: none;
     margin-right: 10px;

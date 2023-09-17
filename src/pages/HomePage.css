@@ -1,12 +1,19 @@
 .homePageContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100vw;
-  padding-top: 80px;
-  padding-bottom: 200px;
+    background-attachment: fixed; /* Add this line */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.homePageContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    padding-top: 80px;
+    padding-bottom: 200px;
 }
 
 .greetingHeader {
@@ -14,4 +21,12 @@
     color: white;
     margin-bottom: 20px;
     font-weight: 700;
+}
+
+.favoritesHeader {
+    font-size: 30px;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 700;
+    width: 80%;
 }

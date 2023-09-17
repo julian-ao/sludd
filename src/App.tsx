@@ -7,7 +7,6 @@ import SearchPage from "./pages/SearchPage";
 
 const queryClient = new QueryClient()
 
-
 export default function App() {
     return (
         <QueryClientProvider client={queryClient}>
@@ -21,4 +20,3 @@ export default function App() {
         </QueryClientProvider>
     );
 }
-
