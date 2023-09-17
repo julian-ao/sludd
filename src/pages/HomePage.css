@@ -30,3 +30,23 @@
     font-weight: 700;
     width: 80%;
 }
+
+.favoritesHeader {
+    font-size: 30px;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 700;
+    width: 80%;
+}
+
+/* Mobile-view */
+@media screen and (max-width: 600px) {
+    .homePageContainer {
+        padding-top: 30px;
+    }
+
+    .greetingHeader {
+        font-size: 40px; /* Juster denne verdien etter behov */
+        text-align: center !important; /* Dette vil sikre at teksten alltid er midtstilt, selv om en annen stil prøver å overstyre den */
+    }
+}
