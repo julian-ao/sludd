@@ -85,8 +85,8 @@ const SearchBar: FC = () => {
             <div
                 className="searchBar"
                 style={{
-                    borderBottomLeftRadius: showDropdown ? 0 : '10px',
-                    borderBottomRightRadius: showDropdown ? 0 : '10px'
+                    borderBottomLeftRadius: showDropdown && data?.navn?.length > 0 ? 0 : '10px',
+                    borderBottomRightRadius: showDropdown && data?.navn?.length > 0 ? 0 : '10px'
                 }}
                 onFocus={() => setShowDropdown(true)}
             >
@@ -112,7 +112,10 @@ const SearchBar: FC = () => {
                 </form>
             </div>
             {showDropdown && data && (
-                <div className='searchDropdown'>
+                <div 
+                    className='searchDropdown'
+                    style={{borderTop: data?.navn?.length > 0 ? "1px solid #C7C7C7" : "none"}}
+                >
                     {(data as LocationQueryData)?.navn?.map((item, index: number) => (
                         <Link
                             className={`searchDropdownItem ${index === selectedOptionIndex ? 'selectedDropdownItem' : ''}`}
