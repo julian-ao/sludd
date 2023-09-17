@@ -1,75 +1,68 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, FC, useCallback } from 'react';
 import { useQuery } from "@tanstack/react-query";
 import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { LocationQueryData } from '../../lib/types';
 import './SearchBar.css';
 
-const SearchBar: React.FC = () => {
+export const API_URL = 'https://ws.geonorge.no/stedsnavn/v1/sted';
+
+const SearchBar: FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
+    const searchBarRef = useRef<HTMLDivElement | null>(null);
     const [selectedOptionIndex, setSelectedOptionIndex] = useState<number>(-1);
     const [lastKeyPressed, setLastKeyPressed] = useState<string>('');
-    const searchBarRef = useRef<HTMLDivElement | null>(null);
+    const navigate = useNavigate();
 
-
-    // Fetch data from API with searchTerm and fuzzy search = true
     const { data, refetch } = useQuery({
         queryKey: ["cordinatesData"],
         enabled: false,
-        queryFn: () =>
-            fetch(`https://ws.geonorge.no/stedsnavn/v1/navn?sok=${searchTerm}&fuzzy=true&utkoordsys=4258&treffPerSide=7&side=1`)
-        .then((res) => res.json()),
+        queryFn: () => fetch(`${API_URL}?sok=${searchTerm}&fuzzy=true&utkoordsys=4258&treffPerSide=7&side=1`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return res.json();
+            }),
     });
 
-    // Fetch data from API and showDropdown when searchTerm changes
     useEffect(() => {
-        if (searchTerm.trim() !== '') {0
-            if (!['ArrowUp', 'ArrowDown', 'Enter'].includes(lastKeyPressed)) {
+        if (searchTerm.trim() !== '') {
+            if (!['ArrowUp', 'ArrowDown'].includes(lastKeyPressed)) {
                 refetch().then(() => setShowDropdown(true));
             }
-        } else {
-            setShowDropdown(false);
         }
     }, [searchTerm]);
 
+    const handleClickOutside = useCallback((event: MouseEvent) => {
+        if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
+            setShowDropdown(false);
+        }
+    }, []);
 
-    // Detect clicks outside of the dropdown and close it
     useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
-                closeDropDown();
-            }
-        };
         document.addEventListener('click', handleClickOutside);
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    }, []);
+    }, [handleClickOutside]);
 
-
-    // Handle search that calls onSearch function prop and close dropdown
-    function handleSearch() {
+    const handleSearch = useCallback(() => {
         if (searchTerm.trim() === '') {
-           alert("Mostl likely not a valid place in Norway")
+            alert("Ikke et gyldig sted i Norge");
         } else {
-            closeDropDown();
-            console.log("Search for: " + searchTerm);
+            setShowDropdown(false);
+            setSelectedOptionIndex(-1);
+            navigate(`/search?q=${searchTerm}`);
         }
-    }
+    }, [navigate, searchTerm]);
 
-    // Handle search with parameter that calls onSearch function prop and close dropdown
-    function handleSearchWithParam(updatedSearchTerm: string) {
-        setSearchTerm(updatedSearchTerm)
-        closeDropDown();
-        console.log("Search for: " + searchTerm);
-    }
-
-
-    // Close dropdown and reset selectedOptionIndex
-    function closeDropDown() {
+    const handleSearchWithParam = useCallback((updatedSearchTerm: string) => {
+        setSearchTerm(updatedSearchTerm);
         setShowDropdown(false);
         setSelectedOptionIndex(-1);
-    }
-
+    }, []);
 
     // Handle key up events (Enter, ArrowUp, ArrowDown)
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -82,11 +75,10 @@ const SearchBar: React.FC = () => {
                 let newIndex = (selectedOptionIndex + (event.key === 'ArrowUp' ? -1 : 1) + itemCount) % itemCount;
                 newIndex = newIndex < 0 ? itemCount - 1 : newIndex;
                 setSelectedOptionIndex(newIndex);
-                setSearchTerm(data?.navn[newIndex].skrivemåte || '');
+                setSearchTerm(data?.navn[newIndex].stedsnavn?.[0]?.skrivemåte  || '');
             }
         }
     };
-
 
     return (
         <div className='searchContainer' ref={searchBarRef}>
@@ -96,33 +88,44 @@ const SearchBar: React.FC = () => {
                     borderBottomLeftRadius: showDropdown ? 0 : '10px',
                     borderBottomRightRadius: showDropdown ? 0 : '10px'
                 }}
+                onFocus={() => setShowDropdown(true)}
             >
-                <FaMapMarkerAlt size={18} color="#999" style={{paddingLeft: "10px"}} />
-                <input
-                  type="text"
-                  placeholder="Søk på et sted i Norge..."
-                  value={searchTerm}
-                  onChange={(event) => setSearchTerm(event.target.value)}
-                  onKeyUp={handleKeyPress}
-                />
-                <button onClick={handleSearch} className='searchButton'>
-                    <FaSearch size={25} color="#999" />
-                </button>
+                <FaMapMarkerAlt size={18} color="#999" style={{ paddingLeft: "10px" }} />
+                {/* <form onSubmit={(event) => { event.preventDefault(); handleSearch(); }}> */}
+                <form
+                    onSubmit={(event) => { event.preventDefault(); handleSearch(); }}
+                    style={{ width: '100%', display: 'flex' }}
+                >
+                    <input
+                        style={{ width: '100%', border: 'none', outline: 'none' }}
+                        type="text"
+                        placeholder="Søk på et sted i Norge..."
+                        value={searchTerm}
+                        onChange={(event) => setSearchTerm(event.target.value)}
+                        onKeyUp={handleKeyPress}
+                    />
+
+                    {/* </form> */}
+                    <button className='searchButton'>
+                        <FaSearch size={25} color="#999" />
+                    </button>
+                </form>
             </div>
             {showDropdown && data && (
                 <div className='searchDropdown'>
-                    {data.navn.map((item: any, index: number) => (
-                        <div
-                          className={`searchDropdownItem ${index === selectedOptionIndex ? 'selectedDropdownItem' : ''}`}
-                          key={index}
-                          onClick={() => {handleSearchWithParam(item.skrivemåte)}}
+                    {(data as LocationQueryData)?.navn?.map((item, index: number) => (
+                        <Link
+                            className={`searchDropdownItem ${index === selectedOptionIndex ? 'selectedDropdownItem' : ''}`}
+                            key={index}
+                            onClick={() => { handleSearchWithParam(item.stedsnavn?.[0]?.skrivemåte || ''); }}
+                            to={`/location/${item?.stedsnavn?.[0]?.skrivemåte}/${item?.stedsnummer}`}
                         >
-                            <FaMapMarkerAlt size={18} color="#999" style={{paddingLeft: "10px"}} />
+                            <FaMapMarkerAlt size={18} color="#999" style={{ paddingLeft: "10px" }} />
                             <div className='dropdownTextDiv'>
-                                <h3>{item.skrivemåte}</h3>
-                                <p>{item.navneobjekttype}, {item.kommuner[0].kommunenavn}</p>
+                                <h3>{item.stedsnavn?.[0]?.skrivemåte || ''}</h3>
+                                <p>{item.navneobjekttype}{item.kommuner?.[0]?.kommunenavn && ', ' + item.kommuner?.[0]?.kommunenavn}</p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             )}

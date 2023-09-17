@@ -1,23 +1,45 @@
 import './Card.css';
-import { useLocationWeatherQuery } from '../../../lib/useLocationWeatherQuery';
 import { getColorFromWeatherDescription } from '../../../lib/cardHelpers';
 import CardSkeleton from './CardSkeleton';
+import { LocationData, WeatherQueryData } from '../../../lib/types';
+import { FC } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+interface LocationCardProps {
+    locationData: LocationData;
+}
+
+const LocationCard: FC<LocationCardProps> = ({ locationData }) => {
+    const coordinates = locationData.representasjonspunkt;
+    // const weatherQuery = useWeather(coordinates.nord, coordinates.øst);
+    const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${coordinates.nord}&lon=${coordinates.øst}`;
+    const { data: weatherData, isLoading: weatherIsLoading, isError: weatherIsError } = useQuery<WeatherQueryData>(
+        ["weather", coordinates.nord, coordinates.øst],
+        async () => {
+            const res = await fetch(url);
+            if (!res.ok) {
+                console.log("res:", res);
+                throw new Error("Network response was not ok");
+            }
+            return res.json();
+        },
+        {
+            enabled: !!coordinates
+        },
+    );
 
 
-const LocationCard = ({ location }: { location: string }) => {
-    const { locationData, weatherQuery } = useLocationWeatherQuery(location);
-
-    if (weatherQuery.isLoading || !locationData) {
+    if (weatherIsLoading || !locationData) {
         return <CardSkeleton />;
     }
 
-    if (weatherQuery.isError) {
+    if (weatherIsError) {
         return <CardSkeleton locationName='Not found' />;
     }
 
-    const data = weatherQuery.data.properties.timeseries[0].data;
-    const symbol_code = data.next_1_hours.summary.symbol_code;
-    const temperature = data.instant.details.air_temperature;
+    const weatherProperties = weatherData.properties.timeseries[0].data;
+    const symbol_code = weatherProperties.next_1_hours.summary.symbol_code;
+    const temperature = weatherProperties.instant.details.air_temperature;
 
     const weatherColor = getColorFromWeatherDescription(symbol_code);
 
@@ -25,9 +47,10 @@ const LocationCard = ({ location }: { location: string }) => {
         <CardSkeleton
             weatherColor={weatherColor}
             temperature={temperature}
-            locationName={locationData?.navn[0].stedsnavn[0].skrivemåte}
+            locationName={locationData?.stedsnavn[0].skrivemåte}
+            locationId={parseInt(locationData?.stedsnummer)}
             symbol_code={symbol_code}
-            navneobjekttype={locationData?.navn[0].navneobjekttype}
+            navneobjekttype={locationData?.navneobjekttype}
         />
     );
 };
