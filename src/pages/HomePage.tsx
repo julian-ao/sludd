@@ -5,9 +5,12 @@ import './HomePage.css';
 import SluddLogo from '../assets/SluddLogo.svg';
 import SearchBar from '../components/SearchBar/SearchBar';
 import LocationCardsView from '../components/views/LocationCardsView/LocationCardsView';
+import { LocationData } from '../lib/types';
 
 export default function HomePage() {
     const [greeting, setGreeting] = useState('');
+
+    const [favoriteLocations, setFavoriteLocations] = useState<LocationData[]>([]);
 
     // Function to get the current time and set the greeting message and background
     const getGreeting = () => {
@@ -23,30 +26,27 @@ export default function HomePage() {
 
     useEffect(() => {
         getGreeting();
+        const favoriteLocations = localStorage.getItem('favorites');
+        favoriteLocations && setFavoriteLocations(JSON.parse(favoriteLocations));
     }, []);
 
     return (
         <div className="homePageContainer">
-            <img src={SluddLogo} alt="Sludd Logo" />
-            <h1 className='greetingHeader'>{greeting}</h1>
-            <SearchBar />
-            <LocationCardsView locationIds={[
-                '509924',
-                '307915',
-                '239083',
-                '369108',
-                '915103',
-                '1072407',
-                '997111',
-                '570647',
-                '406320',
-                '480914',
-                '911117',
-                '61929',
-                '1066023',
-                '1025564',
-                '892087'
-            ]} />
+            <div className='homePageContent'>
+                <img src={SluddLogo} alt="Sludd Logo" />
+                <h1 className='greetingHeader'>{greeting}</h1>
+                <SearchBar />
+                <div className='favoritesHeader'>
+                    Favoritter
+                </div>
+                {
+                    favoriteLocations.length === 0 ?
+                        <div className='noFavoritesText'>
+                            Du har ingen favoritter enda. Legg til en ved å søke på et sted.
+                        </div>
+                        : <LocationCardsView locationData={favoriteLocations} />
+                }
+            </div>
         </div>
     );
 }

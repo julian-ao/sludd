@@ -1,0 +1,82 @@
+.not-found-container {
+    display: flex;
+    padding: 80px 20px;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.notFoundHeader {
+    font-size: 120px;
+    color: #333;
+    margin-bottom: 20px;
+    color: #888;
+}
+
+.notFoundText {
+    font-size: 32px;
+    margin: 0;
+    margin-bottom: 20px;
+    color: #888;
+}
+
+.notFoundDescription {
+    font-size: 20px;
+    text-align: center;
+    color: #888;
+    margin: 2px;
+}
+
+.goHomeButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    margin-top: 50px;
+    padding: 15px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition:
+        background-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.goHomeButton:hover {
+    background-color: #0056b3;
+}
+
+.goHomeButton:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+    .notFoundHeader {
+        font-size: 60px;
+    }
+    .notFoundText {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .notFoundDescription {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 440px) {
+    .notFoundHeader {
+        font-size: 50px;
+    }
+    .notFoundText {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .notFoundDescription {
+        font-size: 12px;
+    }
+    .goHomeButton {
+        font-size: 12px;
+        padding: 10px 20px;
+    }
+}

@@ -1,15 +1,19 @@
 .homePageContainer {
-  background: linear-gradient(to bottom, #87CEEB, #FFFFFF, #FFFFFF);
-  background-size: cover; 
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100vw;
-  padding-top: 80px;
-  padding-bottom: 200px;
+    background-attachment: fixed; /* Add this line */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.homePageContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    padding-top: 80px;
+    padding-bottom: 200px;
 }
 
 .greetingHeader {
@@ -19,14 +23,30 @@
     font-weight: 700;
 }
 
+.favoritesHeader {
+    font-size: 30px;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 700;
+    width: 80%;
+}
+
+.favoritesHeader {
+    font-size: 30px;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 700;
+    width: 80%;
+}
+
 /* Mobile-view */
 @media screen and (max-width: 600px) {
-  .homePageContainer {
-    padding-top: 30px;
-  }
+    .homePageContainer {
+        padding-top: 30px;
+    }
 
-  .greetingHeader {
-      font-size: 40px; /* Juster denne verdien etter behov */
-      text-align: center !important; /* Dette vil sikre at teksten alltid er midtstilt, selv om en annen stil prøver å overstyre den */
-  }
+    .greetingHeader {
+        font-size: 40px; /* Juster denne verdien etter behov */
+        text-align: center !important; /* Dette vil sikre at teksten alltid er midtstilt, selv om en annen stil prøver å overstyre den */
+    }
 }
