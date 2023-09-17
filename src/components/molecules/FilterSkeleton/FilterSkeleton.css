@@ -1,4 +1,10 @@
 .filter_container {
+    background-color: red;
+    height: 51px;
+    margin-bottom: 3rem;
+}
+
+.filter_box {
     color: #6d6d6d;
     background-color: white;
     border-radius: 10px;
@@ -7,9 +13,13 @@
     transition: 0.2s;
     cursor: pointer;
     height: min-content;
+    /* margin-top: 7.5rem; */
+    position: absolute;
+    transform: translate(-50%, 0);
+    z-index: 10;
 }
 
-.filter_container:hover {
+.filter_box:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
