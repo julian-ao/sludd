@@ -13,11 +13,12 @@ type CardProps = {
     symbol_code?: string;
     navneobjekttype?: string;
     locationId?: number;
+    municipality?: string;
 };
 
 
 const CardSkeleton: FC<CardProps> = (props) => {
-    const { weatherColor, temperature, locationName, symbol_code, navneobjekttype, locationId } = props;
+    const { weatherColor, temperature, locationName, symbol_code, navneobjekttype, locationId, municipality } = props;
     const temperatureClass = temperature && temperature < 0 ? 'negative-temperature' : 'positive-temperature';
 
     // Get the history object from React Router
@@ -42,7 +43,7 @@ const CardSkeleton: FC<CardProps> = (props) => {
                     <p className="location-text">{locationName || "Laster..."}</p>
                     <p className="type-text">
                         <FontAwesomeIcon icon={faMapMarkerAlt} style={{ marginRight: "5px" }} />
-                        {navneobjekttype || ""}
+                        {navneobjekttype || ""}, {municipality || ""}
                     </p>
                 </div>
                 <div className="wave-section" style={{ backgroundColor: weatherColor || 'white' }}>
