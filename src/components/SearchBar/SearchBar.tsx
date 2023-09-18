@@ -30,8 +30,8 @@ const SearchBar: FC = () => {
     useEffect(() => {
         if (searchTerm.trim() !== '') {
             if (!['ArrowUp', 'ArrowDown'].includes(lastKeyPressed)) {
-                refetch().then(() => setShowDropdown(true));
-            } 
+                refetch().then(() => setShowDropdown(true)).then(() => setSelectedOptionIndex(-1));
+            }
         }
     }, [searchTerm]);
 
@@ -74,7 +74,7 @@ const SearchBar: FC = () => {
                 let newIndex = (selectedOptionIndex + (event.key === 'ArrowUp' ? -1 : 1) + itemCount) % itemCount;
                 newIndex = newIndex < 0 ? itemCount - 1 : newIndex;
                 setSelectedOptionIndex(newIndex);
-                setSearchTerm(data?.navn[newIndex].stedsnavn?.[0]?.skrivemåte  || '');
+                setSearchTerm(data?.navn[newIndex].stedsnavn?.[0]?.skrivemåte || '');
             }
         }
     };
