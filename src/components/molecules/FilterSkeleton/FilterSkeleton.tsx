@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback} from 'react';
 import './FilterSkeleton.css';
 
 export type FilterSkeletonProps = {
@@ -9,8 +9,8 @@ export type FilterSkeletonProps = {
 };
 
 const FilterSkeleton = (props: FilterSkeletonProps) => {
-
     const [visible, setVisible] = useState<boolean>(false);
+    const filterRef = useRef<HTMLDivElement | null>(null);
 
     const handleCheckboxClick = (event: React.MouseEvent<HTMLInputElement>) => {
         event.stopPropagation(); // Prevent the click event from propagating to the parent container
@@ -23,8 +23,21 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
         }
     };
 
+    const handleClickOutside = useCallback((event: MouseEvent) => {
+        if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+            setVisible(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [handleClickOutside]);
+
     return (
-        <div className='filter_container'>
+        <div className='filter_container' ref={filterRef}>
             <div
                 className='filter_box'
                 onClick={() => setVisible(!visible)}
