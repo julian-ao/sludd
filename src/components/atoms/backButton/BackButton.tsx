@@ -1,11 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import './backButton.css';
 
-const BackButton = () => {
+export type BackButtonProps = {
+    to?: string;
+}
+
+const BackButton = ({ to }: BackButtonProps) => {
     const navigate = useNavigate();
 
     const handleBackClick = () => {
-        navigate(-1); // Use navigate(-1) to navigate back one page
+        if (to) {
+            navigate(to);
+        } else {
+            navigate(-1);
+        }
     };
 
     return (
