@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback} from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import './filterSkeleton.css';
 
 export type FilterSkeletonProps = {
@@ -53,9 +53,10 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
                 </div>
                 <div className='filter_values_container' style={{ visibility: visible ? 'visible' : 'hidden', height: visible ? 'auto' : 0, paddingTop: visible ? '10px' : 0 }}>
                     {props.values.map((value, index) => {
+                        const isChecked = props.currentFilters.includes(value);
                         return (
                             <label key={index} className='filter_value' onClick={(event) => { event.stopPropagation() }}>
-                                <input value={value} type={'checkbox'} className='filter_button' onClick={handleCheckboxClick} />
+                                <input value={value} type={'checkbox'} className='filter_button' onClick={handleCheckboxClick} checked={isChecked} />
                                 {value}
                             </label>
                         );
