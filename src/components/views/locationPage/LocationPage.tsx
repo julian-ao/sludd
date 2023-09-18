@@ -27,15 +27,17 @@ const LocationPage = ({ locationName, locationId }: LocationPageProps) => {
 
     // Retrieve current date and time
     const currentDate = new Date();
-    const currentHour = currentDate.getHours();
-    const currentDay = currentDate.getDate();
 
-    // Filter out the weather data for the current day
-    const todaysWeather = weatherQuery.data.properties.timeseries.filter((timeSeriesItem) => {
+    // Calculate the end date 24 hours from the current date
+    const endDate = new Date(currentDate);
+    endDate.setHours(currentDate.getHours() + 24);
+
+    // Filter out the weather data for the next 24 hours
+    const next24HoursWeather = weatherQuery.data.properties.timeseries.filter((timeSeriesItem) => {
         const date = new Date(timeSeriesItem.time);
-        return date.getHours() >= currentHour &&
-            date.getDate() === currentDay;
+        return date >= currentDate && date < endDate;
     });
+
 
     return (
         <div className='location_main'>
@@ -84,7 +86,7 @@ const LocationPage = ({ locationName, locationId }: LocationPageProps) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {todaysWeather.map((weather, index) => {
+                            {next24HoursWeather.map((weather, index) => {
                                 // Adjust the index with 2 to retrieve the correct data
                                 const adjustedWeather = weatherQuery.data.properties.timeseries[index + 2];
                                 return (
