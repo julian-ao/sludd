@@ -2,8 +2,8 @@ import { useState, useEffect, useRef, FC, useCallback } from 'react';
 import { useQuery } from "@tanstack/react-query";
 import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { LocationQueryData } from '../../lib/types';
-import './SearchBar.css';
+import { LocationQueryData } from '../../../lib/types';
+import './searchBar.css';
 
 export const API_URL = 'https://ws.geonorge.no/stedsnavn/v1/sted';
 
@@ -75,7 +75,7 @@ const SearchBar: FC = () => {
                 let newIndex = (selectedOptionIndex + (event.key === 'ArrowUp' ? -1 : 1) + itemCount) % itemCount;
                 newIndex = newIndex < 0 ? itemCount - 1 : newIndex;
                 setSelectedOptionIndex(newIndex);
-                setSearchTerm(data?.navn[newIndex].stedsnavn?.[0]?.skrivemåte  || '');
+                setSearchTerm(data?.navn[newIndex].stedsnavn?.[0]?.skrivemåte || '');
             }
         }
     };
@@ -112,9 +112,9 @@ const SearchBar: FC = () => {
                 </form>
             </div>
             {showDropdown && data && (
-                <div 
+                <div
                     className='searchDropdown'
-                    style={{borderTop: data?.navn?.length > 0 ? "1px solid #C7C7C7" : "none"}}
+                    style={{ borderTop: data?.navn?.length > 0 ? "1px solid #C7C7C7" : "none" }}
                 >
                     {(data as LocationQueryData)?.navn?.map((item, index: number) => (
                         <Link

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './FilterSkeleton.css';
+import './filterSkeleton.css';
 
 export type FilterSkeletonProps = {
     title: string;

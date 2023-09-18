@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import SearchBar from '../components/SearchBar/SearchBar';
-import LocationCardsView from '../components/views/LocationCardsView/LocationCardsView';
+import SearchBar from '../components/molecules/searchBar/SearchBar';
+import LocationCardsView from '../components/views/locationCardsView/LocationCardsView';
 import { LocationQueryData } from '../lib/types';
 
 const SearchPage = () => {
