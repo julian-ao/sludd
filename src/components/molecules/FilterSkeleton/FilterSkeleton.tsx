@@ -12,7 +12,7 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
     const [visible, setVisible] = useState<boolean>(false);
     const filterRef = useRef<HTMLDivElement | null>(null);
 
-    const handleCheckboxClick = (event: React.MouseEvent<HTMLInputElement>) => {
+    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.stopPropagation(); // Prevent the click event from propagating to the parent container
 
         const value = event.currentTarget.value;
@@ -56,7 +56,13 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
                         const isChecked = props.currentFilters.includes(value);
                         return (
                             <label key={index} className='filter_value' onClick={(event) => { event.stopPropagation() }}>
-                                <input value={value} type={'checkbox'} className='filter_button' onClick={handleCheckboxClick} checked={isChecked} />
+                                <input
+                                    value={value}
+                                    type={'checkbox'}
+                                    className='filter_button'
+                                    onChange={handleCheckboxChange}
+                                    checked={isChecked}
+                                />
                                 {value}
                             </label>
                         );
