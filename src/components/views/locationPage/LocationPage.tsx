@@ -1,16 +1,16 @@
-import './location_page.css';
-import { useLocationWeatherQuery } from '../../lib/useLocationWeatherQuery';
-import { convertDateToReadable } from '../../lib/utils';
-import HeartButton from '../HeartButton/HeartButton';
-import WeatherIcon from '../atoms/icons/WeatherIcon';
-import BackButton from '../atoms/BackButton';
+import './locationPage.css';
+import { useLocationWeatherQuery } from '../../../lib/useLocationWeatherQuery';
+import { convertDateToReadable } from '../../../lib/utils';
+import HeartButton from '../../atoms/heartButton/HeartButton';
+import WeatherIcon from '../../atoms/icons/WeatherIcon';
+import BackButton from '../../atoms/backButton/BackButton';
 
-type LocationComponentProps = {
+type LocationPageProps = {
     locationName: string;
     locationId?: string;
 };
 
-const LocationComponent = ({ locationName, locationId }: LocationComponentProps) => {
+const LocationPage = ({ locationName, locationId }: LocationPageProps) => {
 
     console.log('locationId', locationId);
     //if locationId is undefined, use locationName to get location weather data
@@ -127,4 +127,4 @@ const LocationComponent = ({ locationName, locationId }: LocationComponentProps)
     );
 }
 
-export default LocationComponent;
+export default LocationPage;

@@ -14,7 +14,6 @@ export default function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/location/:locationName/:slug?" element={<LocationPage />} />
-                {/* <Route path="/search/:search" element={<p></p>} /> */}
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </QueryClientProvider>

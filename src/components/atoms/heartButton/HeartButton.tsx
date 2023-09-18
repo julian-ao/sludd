@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import './heartbutton.css';
-import Popup from '../atoms/popup/Popup';
-import solidHeart from '../../assets/heart-solid.svg';
-import borderHeart from '../../assets/heart-border.svg';
-import { LocationData } from '../../lib/types';
+import Popup from '../popup/Popup';
+import solidHeart from '../../../assets/heart-solid.svg';
+import borderHeart from '../../../assets/heart-border.svg';
+import { LocationData } from '../../../lib/types';
 
 export type HeartButtonProps = {
     location: LocationData

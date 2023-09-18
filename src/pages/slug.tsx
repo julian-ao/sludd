@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import LocationComponent from '../components/Location-page/LocationComponent';
+import LocationComponent from '../components/views/locationPage/LocationPage';
 import { useEffect } from 'react';
 
 const LocationPage = () => {
