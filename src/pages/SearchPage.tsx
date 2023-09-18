@@ -2,9 +2,11 @@ import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import SearchBar from '../components/molecules/searchBar/SearchBar';
 import LocationCardsView from '../components/views/locationCardsView/LocationCardsView';
+import BackButton from '../components/atoms/backButton/BackButton';
 import { LocationQueryData } from '../lib/types';
 import FilterSkeleton from '../components/molecules/FilterSkeleton/FilterSkeleton';
 import { useEffect, useState } from 'react';
+import './searchPage.css';
 
 const SearchPage = () => {
 
@@ -41,8 +43,13 @@ const SearchPage = () => {
 
     //TODO: add pagination
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '6rem' }}>
-            <SearchBar />
+        <div className='searchPageContainer'>
+            <div className='searchPageHeaderDiv'>
+                <div className='backButtonDiv'>
+                    <BackButton to="/" />
+                </div>
+                <SearchBar />
+            </div>
             <FilterSkeleton title={'Filter'} values={filterTypes} currentFilters={filters} setFilters={setFilters} />
             {isLoading && <p>Loading...</p>}
             {data && <LocationCardsView locationData={data.navn} />}
