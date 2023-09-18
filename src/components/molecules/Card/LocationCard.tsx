@@ -37,7 +37,7 @@ const LocationCard: FC<LocationCardProps> = ({ locationData }) => {
         return <CardSkeleton locationName='Not found' />;
     }
 
-    const weatherProperties = weatherData.properties.timeseries[0].data;
+    const weatherProperties = weatherData.properties.timeseries[2].data;
     const symbol_code = weatherProperties.next_1_hours.summary.symbol_code;
     const temperature = weatherProperties.instant.details.air_temperature;
 
