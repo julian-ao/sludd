@@ -30,7 +30,7 @@ const SearchBar: FC = () => {
     useEffect(() => {
         if (searchTerm.trim() !== '') {
             if (!['ArrowUp', 'ArrowDown'].includes(lastKeyPressed)) {
-                refetch().then(() => setShowDropdown(true));
+                refetch().then(() => setShowDropdown(true)).then(() => setSelectedOptionIndex(-1));
             }
         }
     }, [searchTerm]);
@@ -38,6 +38,7 @@ const SearchBar: FC = () => {
     const handleClickOutside = useCallback((event: MouseEvent) => {
         if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
             setShowDropdown(false);
+            setSelectedOptionIndex(-1);
         }
     }, []);
 
@@ -53,22 +54,20 @@ const SearchBar: FC = () => {
             alert("Ikke et gyldig sted i Norge");
         } else {
             setShowDropdown(false);
-            setSelectedOptionIndex(-1);
             navigate(`/search?q=${searchTerm}`);
         }
     }, [navigate, searchTerm]);
-
-    const handleSearchWithParam = useCallback((updatedSearchTerm: string) => {
-        setSearchTerm(updatedSearchTerm);
-        setShowDropdown(false);
-        setSelectedOptionIndex(-1);
-    }, []);
 
     // Handle key up events (Enter, ArrowUp, ArrowDown)
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         setLastKeyPressed(event.key);
         if (event.key === 'Enter') {
-            handleSearch();
+            if (selectedOptionIndex >= 0) {
+                const selectedItem = data?.navn[selectedOptionIndex];
+                navigate(`/location/${selectedItem?.stedsnavn?.[0]?.skrivemåte}/${selectedItem?.stedsnummer}`);
+            } else if (searchTerm.trim() !== '') {
+                handleSearch();
+            }
         } else if (['ArrowUp', 'ArrowDown'].includes(event.key) && showDropdown) {
             const itemCount = data?.navn?.length || 0;
             if (itemCount > 0) {
@@ -88,28 +87,18 @@ const SearchBar: FC = () => {
                     borderBottomLeftRadius: showDropdown && data?.navn?.length > 0 ? 0 : '10px',
                     borderBottomRightRadius: showDropdown && data?.navn?.length > 0 ? 0 : '10px'
                 }}
-                onFocus={() => setShowDropdown(true)}
             >
                 <FaMapMarkerAlt size={18} color="#999" style={{ paddingLeft: "10px" }} />
-                {/* <form onSubmit={(event) => { event.preventDefault(); handleSearch(); }}> */}
-                <form
-                    onSubmit={(event) => { event.preventDefault(); handleSearch(); }}
-                    style={{ width: '100%', display: 'flex' }}
-                >
-                    <input
-                        style={{ width: '100%', border: 'none', outline: 'none' }}
-                        type="text"
-                        placeholder="Søk på et sted i Norge..."
-                        value={searchTerm}
-                        onChange={(event) => setSearchTerm(event.target.value)}
-                        onKeyUp={handleKeyPress}
-                    />
-
-                    {/* </form> */}
-                    <button className='searchButton'>
-                        <FaSearch size={25} color="#999" />
-                    </button>
-                </form>
+                <input
+                    type="text"
+                    placeholder="Søk på et sted i Norge..."
+                    value={searchTerm}
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                    onKeyUp={handleKeyPress}
+                />
+                <button className='searchButton' onClick={handleSearch}>
+                    <FaSearch size={25} color="#999" />
+                </button>
             </div>
             {showDropdown && data && (
                 <div
@@ -120,7 +109,6 @@ const SearchBar: FC = () => {
                         <Link
                             className={`searchDropdownItem ${index === selectedOptionIndex ? 'selectedDropdownItem' : ''}`}
                             key={index}
-                            onClick={() => { handleSearchWithParam(item.stedsnavn?.[0]?.skrivemåte || ''); }}
                             to={`/location/${item?.stedsnavn?.[0]?.skrivemåte}/${item?.stedsnummer}`}
                         >
                             <FaMapMarkerAlt size={18} color="#999" style={{ paddingLeft: "10px" }} />
