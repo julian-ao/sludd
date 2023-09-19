@@ -4,7 +4,7 @@ import SearchBar from '../components/molecules/searchBar/SearchBar';
 import LocationCardsView from '../components/views/locationCardsView/LocationCardsView';
 import BackButton from '../components/atoms/backButton/BackButton';
 import { LocationQueryData } from '../lib/types';
-import FilterSkeleton from '../components/molecules/filterSkeleton/FilterSkeleton';
+import FilterSkeleton from '../components/molecules/FilterSkeleton/FilterSkeleton';
 import { useEffect, useState } from 'react';
 import './searchPage.css';
 
@@ -34,6 +34,7 @@ const SearchPage = () => {
             }),
     });
 
+
     useEffect(() => {
         // update sessionStorage whenever a filter is applied
         window.sessionStorage.setItem("filters", JSON.stringify(filters))
@@ -56,8 +57,12 @@ const SearchPage = () => {
                 <SearchBar />
             </div>
             <FilterSkeleton title={'Filter'} values={filterTypes} currentFilters={filters} setFilters={setFilters} />
-            {isLoading && <p>Loading...</p>}
-            {data && <LocationCardsView locationData={data.navn} />}
+            {isLoading
+                ? <p className='resultText'>Laster...</p>
+                : data && data?.navn?.length > 0
+                    ? <LocationCardsView locationData={data.navn} />
+                    : <p className='resultText'>Ingen resultater for dette søket</p>
+            }
         </div>
     );
 };
