@@ -12,7 +12,6 @@ type LocationPageProps = {
 
 const LocationPage = ({ locationName, locationId }: LocationPageProps) => {
 
-    console.log('locationId', locationId);
     //if locationId is undefined, use locationName to get location weather data
     //if locationId is defined, use locationId to get location weather data
 

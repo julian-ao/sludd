@@ -18,7 +18,6 @@ const LocationCard: FC<LocationCardProps> = ({ locationData }) => {
         async () => {
             const res = await fetch(url);
             if (!res.ok) {
-                console.log("res:", res);
                 throw new Error("Network response was not ok");
             }
             return res.json();
