@@ -33,8 +33,10 @@
 
 .favoritesHeader {
     font-size: 30px;
+    text-align: center;
     color: white;
     margin-bottom: 20px;
+    margin-top: 40px;
     font-weight: 700;
     width: 80%;
 }

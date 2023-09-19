@@ -116,3 +116,9 @@ input[type='text']::placeholder {
 .searchButton:hover {
     cursor: pointer;
 }
+
+@media screen and (max-width: 420px) {
+    .searchButton {
+        display: none;
+    }
+}
