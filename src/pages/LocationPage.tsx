@@ -1,9 +1,9 @@
 import './locationPage.css';
-import { useLocationWeatherQuery } from '../../../lib/useLocationWeatherQuery';
-import { convertDateToReadable } from '../../../lib/utils';
-import HeartButton from '../../atoms/heartButton/HeartButton';
-import WeatherIcon from '../../atoms/icons/WeatherIcon';
-import BackButton from '../../atoms/backButton/BackButton';
+import { useLocationWeatherQuery } from '../lib/useLocationWeatherQuery';
+import { convertDateToReadable } from '../lib/utils';
+import HeartButton from '../components/atoms/heartButton/HeartButton';
+import WeatherIcon from '../components/atoms/icons/WeatherIcon';
+import BackButton from '../components/atoms/backButton/BackButton';
 
 type LocationPageProps = {
     locationName: string;

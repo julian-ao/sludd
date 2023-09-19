@@ -2,14 +2,13 @@ import './Card.css';
 import { getColorFromWeatherDescription } from '../../../lib/cardHelpers';
 import CardSkeleton from './CardSkeleton';
 import { LocationData, WeatherQueryData } from '../../../lib/types';
-import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 interface LocationCardProps {
     locationData: LocationData;
 }
 
-const LocationCard: FC<LocationCardProps> = ({ locationData }) => {
+const LocationCard = ({ locationData }: LocationCardProps) => {
     const coordinates = locationData.representasjonspunkt;
     // const weatherQuery = useWeather(coordinates.nord, coordinates.øst);
     const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${coordinates.nord}&lon=${coordinates.øst}`;

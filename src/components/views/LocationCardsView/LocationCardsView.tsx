@@ -1,5 +1,4 @@
-import { FC } from "react";
-import "./LocationCards.css";
+import "./locationCards.css";
 import LocationCard from "../../molecules/card/LocationCard";
 import { LocationData } from "../../../lib/types";
 
@@ -7,7 +6,7 @@ export type LocationCardsData = {
     locationData: LocationData[];
 };
 
-const LocationCardsView: FC<LocationCardsData> = (props) => {
+const LocationCardsView = (props: LocationCardsData) => {
     const { locationData } = props;
 
     return (
