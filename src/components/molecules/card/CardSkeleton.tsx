@@ -1,4 +1,3 @@
-import { FC } from "react";
 import WeatherIcon from "../../atoms/icons/WeatherIcon";
 import './Card.css';
 import AnimatedWave from "./Wave";
@@ -17,7 +16,7 @@ type CardProps = {
 };
 
 
-const CardSkeleton: FC<CardProps> = (props) => {
+const CardSkeleton = (props: CardProps) => {
     const { weatherColor, temperature, locationName, symbol_code, navneobjekttype, locationId, municipality } = props;
     const temperatureClass = temperature && temperature < 0 ? 'negative-temperature' : 'positive-temperature';
 

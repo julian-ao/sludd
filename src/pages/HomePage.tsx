@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-
-// Components
-import './HomePage.css';
+import './homePage.css';
 import SluddLogo from '../assets/sluddLogo.svg';
 import SearchBar from '../components/molecules/searchBar/SearchBar';
 import LocationCardsView from '../components/views/locationCardsView/LocationCardsView';
