@@ -4,7 +4,7 @@ import SearchBar from '../components/molecules/searchBar/SearchBar';
 import LocationCardsView from '../components/views/locationCardsView/LocationCardsView';
 import BackButton from '../components/atoms/backButton/BackButton';
 import { LocationQueryData } from '../lib/types';
-import FilterSkeleton from '../components/molecules/FilterSkeleton/FilterSkeleton';
+import FilterSkeleton from '../components/molecules/filterSkeleton/FilterSkeleton';
 import { useEffect, useState } from 'react';
 import './searchPage.css';
 

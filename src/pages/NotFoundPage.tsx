@@ -1,7 +1,7 @@
-import './NotFoundPage.css'; 
+import './NotFoundPage.css';
 import { useNavigate } from "react-router-dom";
 
-const NotFoundPage: React.FC = () => {
+const NotFoundPage = () => {
     const navigate = useNavigate();
 
     return (
