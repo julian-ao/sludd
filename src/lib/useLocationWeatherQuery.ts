@@ -13,7 +13,6 @@ interface locationId {
 }
 
 export const useLocationWeatherQuery = (data: locationName | locationId) => {
-    console.log(data);
 
     const [locationData, setLocationData] = useState<LocationQueryData | null>(
         null,
@@ -38,8 +37,6 @@ export const useLocationWeatherQuery = (data: locationName | locationId) => {
             throw new Error("Invalid data");
         },
     );
-
-    console.log(locationQuery);
 
     useEffect(() => {
         if (locationQuery.isSuccess) {

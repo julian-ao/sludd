@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback} from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import './filterSkeleton.css';
 
 export type FilterSkeletonProps = {
@@ -12,7 +12,7 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
     const [visible, setVisible] = useState<boolean>(false);
     const filterRef = useRef<HTMLDivElement | null>(null);
 
-    const handleCheckboxClick = (event: React.MouseEvent<HTMLInputElement>) => {
+    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.stopPropagation(); // Prevent the click event from propagating to the parent container
 
         const value = event.currentTarget.value;
@@ -53,9 +53,16 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
                 </div>
                 <div className='filter_values_container' style={{ visibility: visible ? 'visible' : 'hidden', height: visible ? 'auto' : 0, paddingTop: visible ? '10px' : 0 }}>
                     {props.values.map((value, index) => {
+                        const isChecked = props.currentFilters.includes(value);
                         return (
                             <label key={index} className='filter_value' onClick={(event) => { event.stopPropagation() }}>
-                                <input value={value} type={'checkbox'} className='filter_button' onClick={handleCheckboxClick} />
+                                <input
+                                    value={value}
+                                    type={'checkbox'}
+                                    className='filter_button'
+                                    onChange={handleCheckboxChange}
+                                    checked={isChecked}
+                                />
                                 {value}
                             </label>
                         );

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, FC, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useQuery } from "@tanstack/react-query";
 import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import './searchBar.css';
 
 export const API_URL = 'https://ws.geonorge.no/stedsnavn/v1/sted';
 
-const SearchBar: FC = () => {
+const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const searchBarRef = useRef<HTMLDivElement | null>(null);

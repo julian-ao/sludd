@@ -1,14 +1,14 @@
 import { CSSProperties } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-type Props = {
+type WaveProps = {
     color: CSSProperties["color"];
     animationDuration: CSSProperties["animationDuration"];
     animationDirection?: CSSProperties["animationDirection"];
     opacity: CSSProperties["opacity"];
 };
 
-const AnimatedWave: React.FC<Props> = ({ color, ...props }) => {
+const AnimatedWave = ({ color, ...props }: WaveProps) => {
 
     const wave = (
         <svg viewBox="0 0 1000 126" xmlns="http://www.w3.org/2000/svg">
@@ -31,11 +31,10 @@ const AnimatedWave: React.FC<Props> = ({ color, ...props }) => {
                 width: "100%",
                 height: `${Math.floor(Math.random() * (38 - 25 + 1)) + 25}px`,
                 backgroundSize: "300px 40px",
-                animation: `wave ${props.animationDuration} linear infinite`,
-                animationDirection: props.animationDirection,
+                animation: `wave ${props.animationDuration} linear infinite ${props.animationDirection || "normal"}`,
                 opacity: props.opacity,
             }}
-        ></div>
+        />
     );
 };
 export default AnimatedWave;
