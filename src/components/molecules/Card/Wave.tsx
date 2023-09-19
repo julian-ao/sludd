@@ -31,11 +31,10 @@ const AnimatedWave = ({ color, ...props }: WaveProps) => {
                 width: "100%",
                 height: `${Math.floor(Math.random() * (38 - 25 + 1)) + 25}px`,
                 backgroundSize: "300px 40px",
-                animation: `wave ${props.animationDuration} linear infinite`,
-                animationDirection: props.animationDirection,
+                animation: `wave ${props.animationDuration} linear infinite ${props.animationDirection || "normal"}`,
                 opacity: props.opacity,
             }}
-        ></div>
+        />
     );
 };
 export default AnimatedWave;
