@@ -50,10 +50,10 @@ export function parseWeatherDescription(symbol_code: string) {
 }
 
 const weatherColors = {
-    clearsky: ["#EDE487", "#F6E47E", "#F6EC7E"],
+    clearsky: ["#ded364", "#ede26f", "#d9cf64"],
     fair: ["#8FEFBE", "#90F0AE", "#90F0CF"],
     cloudy: ["#8C9C9A", "#8D9C8E", "#9C998C"],
-    rain: ["#8AD2EA", "#A4DCEE", "#BEE6F3"],
+    rain: ["#8AD2EA", "#A4DCEE", "#93d1e6"],
     snow: ["#6E8FF5", "#6EA7F5", "#6EBEF5"],
     sleet: ["#9FA1ED", "#AB9FEC", "#B89FED"],
     fog: ["#5E6385", "#605E84", "#675E85"],
