@@ -36,7 +36,8 @@ const LocationCard = ({ locationData }: LocationCardProps) => {
     }
 
     const weatherProperties = weatherData.properties.timeseries[2].data;
-    const symbol_code = weatherProperties.next_1_hours.summary.symbol_code;
+    const lastHourWeatherProperties = weatherData.properties.timeseries[1].data;
+    const symbol_code = lastHourWeatherProperties.next_1_hours.summary.symbol_code;
     const temperature = weatherProperties.instant.details.air_temperature;
 
     const weatherColor = getColorFromWeatherDescription(symbol_code);
