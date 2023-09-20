@@ -73,15 +73,15 @@ const SearchPage = () => {
     // Set maxPage whenever new data is fetched
     useEffect(() => {
         if (data) {
-            setMaxPage(
-                Math.ceil(data?.metadata?.totaltAntallTreff! / hitsPerPage),
-            );
+            const totalTreff = data.metadata?.totaltAntallTreff ?? 0;
+            setMaxPage(Math.ceil(totalTreff / hitsPerPage));
         }
     }, [data]);
 
     // Refetch data when currentPage changes
     useEffect(() => {
         refetch();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage]);
 
     // Navigate to home page when logo is clicked

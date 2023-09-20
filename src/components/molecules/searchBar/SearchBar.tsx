@@ -46,6 +46,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
                     .then(() => setSelectedOptionIndex(-1));
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchTerm]);
 
     // Handle click outside of search bar and set showDropdown false
@@ -76,6 +77,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
             if (onSearch) onSearch();
             navigate(`/search?q=${searchTerm}`);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [navigate, searchTerm]);
 
     // Handle key up events (Enter, ArrowUp, ArrowDown)
