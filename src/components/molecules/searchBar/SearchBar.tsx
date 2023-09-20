@@ -133,11 +133,13 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
                         showDropdown && data?.navn?.length > 0 ? 0 : '10px',
                 }}
             >
-                <FaMapMarkerAlt
-                    size={18}
-                    color="#999"
-                    style={{ paddingLeft: '10px' }}
-                />
+                <div className='searchBarIcon'>
+                    <FaMapMarkerAlt
+                        size={18}
+                        color="#999"
+                        style={{ paddingLeft: '10px' }}
+                    />
+                </div>
                 <input
                     type="text"
                     placeholder="Søk på et sted i Norge..."
