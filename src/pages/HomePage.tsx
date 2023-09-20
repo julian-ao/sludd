@@ -11,10 +11,6 @@ export default function HomePage() {
         [],
     );
 
-    const [favoriteLocations, setFavoriteLocations] = useState<LocationData[]>(
-        [],
-    );
-
     // Function to get the current time and set the greeting message and background
     const getGreeting = () => {
         const currentTime = new Date().getHours();
