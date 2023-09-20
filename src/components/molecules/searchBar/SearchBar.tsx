@@ -7,7 +7,11 @@ import './searchBar.css';
 
 export const API_URL = 'https://ws.geonorge.no/stedsnavn/v1/sted';
 
-const SearchBar = () => {
+type SearchBarProps = {
+    onSearch?: () => void;
+}
+
+const SearchBar = ({onSearch}: SearchBarProps) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const searchBarRef = useRef<HTMLDivElement | null>(null);
@@ -54,6 +58,7 @@ const SearchBar = () => {
             alert("Ikke et gyldig sted i Norge");
         } else {
             setShowDropdown(false);
+            if (onSearch) onSearch();
             navigate(`/search?q=${searchTerm}`);
         }
     }, [navigate, searchTerm]);
