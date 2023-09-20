@@ -4,18 +4,19 @@ import './filterSkeleton.css';
 export type FilterSkeletonProps = {
     title: string;
     values: string[];
-    currentFilters: string[]; // state from parent component
-    setFilters: (list: string[]) => void; // state setter from parent component
+    currentFilters: string[];
+    setFilters: (list: string[]) => void;
 };
 
 const FilterSkeleton = (props: FilterSkeletonProps) => {
     const [visible, setVisible] = useState<boolean>(false);
     const filterRef = useRef<HTMLDivElement | null>(null);
 
+    // Handle checkbox change and add/remove value from currentFilters
     const handleCheckboxChange = (
         event: React.ChangeEvent<HTMLInputElement>,
     ) => {
-        event.stopPropagation(); // Prevent the click event from propagating to the parent container
+        event.stopPropagation();
 
         const value = event.currentTarget.value;
         if (props.currentFilters.includes(value)) {
@@ -27,6 +28,7 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
         }
     };
 
+    // Handle click outside of filter box and set visible false
     const handleClickOutside = useCallback((event: MouseEvent) => {
         if (
             filterRef.current &&
@@ -36,6 +38,7 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
         }
     }, []);
 
+    // Add event listener for click outside of filter box
     useEffect(() => {
         document.addEventListener('click', handleClickOutside);
         return () => {

@@ -10,6 +10,7 @@ interface LocationCardProps {
 
 const LocationCard = ({ locationData }: LocationCardProps) => {
     const coordinates = locationData.representasjonspunkt;
+
     // const weatherQuery = useWeather(coordinates.nord, coordinates.øst);
     const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${coordinates.nord}&lon=${coordinates.øst}`;
     const {
@@ -30,10 +31,12 @@ const LocationCard = ({ locationData }: LocationCardProps) => {
         },
     );
 
+    // Return skeleton if weather is loading or location data is undefined
     if (weatherIsLoading || !locationData) {
         return <CardSkeleton />;
     }
 
+    // Return skeleton not found if weather is error
     if (weatherIsError) {
         return <CardSkeleton locationName="Not found" />;
     }
@@ -43,7 +46,6 @@ const LocationCard = ({ locationData }: LocationCardProps) => {
     const symbol_code =
         lastHourWeatherProperties.next_1_hours.summary.symbol_code;
     const temperature = weatherProperties.instant.details.air_temperature;
-
     const weatherColor = getColorFromWeatherDescription(symbol_code);
 
     return (

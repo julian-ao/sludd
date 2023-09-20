@@ -8,6 +8,7 @@ export type BackButtonProps = {
 const BackButton = ({ to }: BackButtonProps) => {
     const navigate = useNavigate();
 
+    // Navigate back to previous page or to given path
     const handleBackClick = () => {
         if (to) {
             navigate(to);

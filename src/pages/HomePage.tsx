@@ -7,7 +7,6 @@ import { LocationData } from '../lib/types';
 
 export default function HomePage() {
     const [greeting, setGreeting] = useState('');
-
     const [favoriteLocations, setFavoriteLocations] = useState<LocationData[]>(
         [],
     );
@@ -33,6 +32,7 @@ export default function HomePage() {
         setGreeting(greetings[greetingIndex]);
     };
 
+    // Get the greeting message and favorite locations from local storage
     useEffect(() => {
         getGreeting();
         const favoriteLocations = localStorage.getItem('favorites');

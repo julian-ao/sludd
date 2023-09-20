@@ -21,6 +21,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
     const [isPopupShown, setIsPopupShown] = useState<boolean>(false);
     const navigate = useNavigate();
 
+    // Fetch data from API based on search term, with fuzzy search true and hit limit 7
     const { data, refetch } = useQuery({
         queryKey: ['cordinatesData'],
         enabled: false,
@@ -35,6 +36,8 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
             }),
     });
 
+    // Refetch data when search term changes,
+    // then set showSropdown true  and reset selected option index
     useEffect(() => {
         if (searchTerm.trim() !== '') {
             if (!['ArrowUp', 'ArrowDown'].includes(lastKeyPressed)) {
@@ -46,6 +49,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchTerm]);
 
+    // Handle click outside of search bar and set showDropdown false
     const handleClickOutside = useCallback((event: MouseEvent) => {
         if (
             searchBarRef.current &&
@@ -56,6 +60,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         }
     }, []);
 
+    // Add event listener for click outside of search bar
     useEffect(() => {
         document.addEventListener('click', handleClickOutside);
         return () => {
@@ -63,6 +68,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         };
     }, [handleClickOutside]);
 
+    // Handle search if search term is not empty and navigate to search page
     const handleSearch = useCallback(() => {
         if (searchTerm.trim() === '') {
             showPopup();
@@ -106,6 +112,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         }
     };
 
+    // Show popup for 1.5 seconds
     const showPopup = () => {
         setIsPopupShown(true);
 

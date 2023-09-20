@@ -8,6 +8,7 @@ type WeatherIconProps = {
 const WeatherIcon = ({ symbol_code, size }: WeatherIconProps) => {
     const [weatherIcon, setWeatherIcon] = useState<string>();
 
+    // Import weather icon based on symbol code
     useEffect(() => {
         (async () => {
             if (!symbol_code) {

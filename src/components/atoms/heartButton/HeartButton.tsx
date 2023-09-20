@@ -18,9 +18,9 @@ const HeartButton = (props: HeartButtonProps) => {
     });
 
     const [isPopupShown, setIsPopupShown] = useState(false);
-
     const [popupText, setPopupText] = useState<string>();
 
+    // Add/remove location from favorites and store in local storage
     const toggleFavorite = () => {
         const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
@@ -49,6 +49,7 @@ const HeartButton = (props: HeartButtonProps) => {
         showPopup();
     };
 
+    // Show popup for 1.5 seconds
     const showPopup = () => {
         setIsPopupShown(true);
 

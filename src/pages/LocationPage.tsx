@@ -14,6 +14,9 @@ type LocationPageProps = {
 
 const LocationPage = ({ locationName, locationId }: LocationPageProps) => {
     const navigate = useNavigate();
+    const currentDate = new Date();
+    const endDate = new Date(currentDate);
+    endDate.setHours(currentDate.getHours() + 24);
 
     const handleLogoClick = () => {
         navigate('/');
@@ -21,7 +24,6 @@ const LocationPage = ({ locationName, locationId }: LocationPageProps) => {
 
     //if locationId is undefined, use locationName to get location weather data
     //if locationId is defined, use locationId to get location weather data
-
     const { locationData, weatherQuery } = useLocationWeatherQuery({
         locationName: locationName,
         locationId: locationId,
@@ -30,16 +32,10 @@ const LocationPage = ({ locationName, locationId }: LocationPageProps) => {
         return <div className="location_main">Loading...</div>;
     }
 
+    // If there is an error, display error message
     if (weatherQuery.isError) {
         return <div className="location_main">Error loading data</div>;
     }
-
-    // Retrieve current date and time
-    const currentDate = new Date();
-
-    // Calculate the end date 24 hours from the current date
-    const endDate = new Date(currentDate);
-    endDate.setHours(currentDate.getHours() + 24);
 
     // Filter out the weather data for the next 24 hours
     const next24HoursWeather = weatherQuery.data.properties.timeseries.filter(

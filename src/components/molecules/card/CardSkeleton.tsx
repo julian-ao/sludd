@@ -36,6 +36,7 @@ const CardSkeleton = (props: CardProps) => {
     // Get the history object from React Router
     const navigate = useNavigate();
 
+    // Handle click on card and navigate to location page
     const handleClick = () => {
         if (locationName) {
             navigate(`/location/${locationName}/${locationId!}`);

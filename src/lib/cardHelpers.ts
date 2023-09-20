@@ -1,3 +1,4 @@
+// Dictionary of weather descriptions for the different weather types
 const weatherDescription: { [key: string]: string } = {
     clearsky: "Clear sky",
     fair: "Fair",
@@ -42,13 +43,14 @@ const weatherDescription: { [key: string]: string } = {
     fog: "Fog",
 };
 
+// Takes a symbol_code and returns the corresponding weather description
 export function parseWeatherDescription(symbol_code: string) {
     const splitSymbolCode = symbol_code.split("_");
     const description = weatherDescription[splitSymbolCode[0]];
 
     return description;
 }
-
+// Dictionary of colors for the different weather types
 const weatherColors = {
     clearsky: ["#ded364", "#ede26f", "#d9cf64"],
     fair: ["#8FEFBE", "#90F0AE", "#90F0CF"],
@@ -59,6 +61,7 @@ const weatherColors = {
     fog: ["#5E6385", "#605E84", "#675E85"],
 };
 
+// Takes a symbol_code and returns the corresponding color
 export function getColorFromWeatherDescription(symbol_code: string) {
     //use weatherColors to get color from symbol_code
     for (const [key, value] of Object.entries(weatherColors)) {
