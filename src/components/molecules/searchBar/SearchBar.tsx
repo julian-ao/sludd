@@ -12,7 +12,7 @@ type SearchBarProps = {
     onSearch?: () => void;
 }
 
-const SearchBar = ({onSearch}: SearchBarProps) => {
+const SearchBar = ({ onSearch }: SearchBarProps) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const searchBarRef = useRef<HTMLDivElement | null>(null);
@@ -39,6 +39,7 @@ const SearchBar = ({onSearch}: SearchBarProps) => {
                 refetch().then(() => setShowDropdown(true)).then(() => setSelectedOptionIndex(-1));
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchTerm]);
 
     const handleClickOutside = useCallback((event: MouseEvent) => {
@@ -63,6 +64,7 @@ const SearchBar = ({onSearch}: SearchBarProps) => {
             if (onSearch) onSearch();
             navigate(`/search?q=${searchTerm}`);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [navigate, searchTerm]);
 
     // Handle key up events (Enter, ArrowUp, ArrowDown)

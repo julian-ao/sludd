@@ -77,12 +77,15 @@ const SearchPage = () => {
 
     useEffect(() => {
         if (data) {
-            setMaxPage(Math.ceil(data?.metadata?.totaltAntallTreff! / hitsPerPage));
+            const totalTreff = data.metadata?.totaltAntallTreff ?? 0;
+            setMaxPage(Math.ceil(totalTreff / hitsPerPage));
         }
     }, [data]);
 
+
     useEffect(() => {
         refetch();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage]);
 
     return (
