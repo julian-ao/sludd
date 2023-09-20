@@ -122,7 +122,4 @@ input[type='text']::placeholder {
     .searchButton {
         display: none;
     }
-    svg {
-        display: none;
-    }
 }
