@@ -6,6 +6,17 @@ exports[`SearchBar > should render correctly 1`] = `
     class="searchContainer"
   >
     <div
+      class="popup "
+    >
+      <div
+        class="popup-content"
+      >
+        <p>
+          🔍 Skriv inn et søkeord
+        </p>
+      </div>
+    </div>
+    <div
       class="searchBar"
       style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;"
     >

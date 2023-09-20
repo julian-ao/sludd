@@ -6,7 +6,9 @@ exports[`FilterSkeleton > should render correctly 1`] = `
     class="filter_container"
   >
     <div
+      aria-label="click me!"
       class="filter_box"
+      role="filter_box"
     >
       <div
         class="filter_title"
@@ -34,6 +36,7 @@ exports[`FilterSkeleton > should render correctly 1`] = `
       </div>
       <div
         class="filter_values_container"
+        role="filter_values_container"
         style="visibility: hidden; height: 0px; padding-top: 0px;"
       >
         <label
@@ -136,7 +139,9 @@ exports[`FilterSkeleton > should render correctly with no current filters 1`] = 
     class="filter_container"
   >
     <div
+      aria-label="click me!"
       class="filter_box"
+      role="filter_box"
     >
       <div
         class="filter_title"
@@ -157,6 +162,7 @@ exports[`FilterSkeleton > should render correctly with no current filters 1`] = 
       </div>
       <div
         class="filter_values_container"
+        role="filter_values_container"
         style="visibility: hidden; height: 0px; padding-top: 0px;"
       >
         <label

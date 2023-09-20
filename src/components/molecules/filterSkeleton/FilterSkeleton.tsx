@@ -40,6 +40,8 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
         <div className='filter_container' ref={filterRef}>
             <div
                 className='filter_box'
+                role='filter_box'
+                aria-label='click me!'
                 onClick={() => setVisible(!visible)}
             >
                 <div className='filter_title' style={{ borderBottom: visible ? '1px solid #c7c7c7' : 'none', paddingBottom: visible ? '10px' : 0 }}>
@@ -51,7 +53,10 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
                         <div style={{ marginLeft: '5px' }}>({props.currentFilters.length} valgt)</div>
                     )}
                 </div>
-                <div className='filter_values_container' style={{ visibility: visible ? 'visible' : 'hidden', height: visible ? 'auto' : 0, paddingTop: visible ? '10px' : 0 }}>
+                <div
+                    className='filter_values_container'
+                    role="filter_values_container"
+                    style={{ visibility: visible ? 'visible' : 'hidden', height: visible ? 'auto' : 0, paddingTop: visible ? '10px' : 0 }}>
                     {props.values.map((value, index) => {
                         const isChecked = props.currentFilters.includes(value);
                         return (
