@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import SearchBar from '../components/molecules/searchBar/SearchBar';
@@ -8,11 +8,19 @@ import LocationCardsView from '../components/views/locationCardsView/LocationCar
 import FilterSkeleton from '../components/molecules/filterSkeleton/FilterSkeleton';
 import BackButton from '../components/atoms/backButton/BackButton';
 import './searchPage.css';
+import SluddLogo from '../assets/sluddLogo.svg';
 
 export const API_URL = 'https://ws.geonorge.no/stedsnavn/v1/sted';
 const hitsPerPage = 12;
 
 const SearchPage = () => {
+
+    const navigate = useNavigate();
+
+    const handleLogoClick = () => {
+        navigate('/');
+    };
+
     const [searchParams] = useSearchParams();
     const searchTerm = searchParams.get('q') || undefined;
     const [currentPage, setCurrentPage] = useState(1);
@@ -78,9 +86,11 @@ const SearchPage = () => {
     }, [currentPage]);
 
     return (
-        <div className="searchPageContainer">
-            <div className="searchPageHeaderDiv">
-                <div className="backButtonDiv">
+
+        <div className='searchPageContainer'>
+            <img src={SluddLogo} alt="Sludd Logo" id='logo' onClick={handleLogoClick} />
+            <div className='searchPageHeaderDiv'>
+                <div className='backButtonDiv'>
                     <BackButton to="/" />
                 </div>
                 <SearchBar

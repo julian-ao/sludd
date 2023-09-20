@@ -4,6 +4,7 @@ import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { LocationQueryData } from '../../../lib/types';
 import './searchBar.css';
+import Popup from '../../atoms/popup/Popup';
 
 export const API_URL = 'https://ws.geonorge.no/stedsnavn/v1/sted';
 
@@ -17,6 +18,7 @@ const SearchBar = ({onSearch}: SearchBarProps) => {
     const searchBarRef = useRef<HTMLDivElement | null>(null);
     const [selectedOptionIndex, setSelectedOptionIndex] = useState<number>(-1);
     const [lastKeyPressed, setLastKeyPressed] = useState<string>('');
+    const [isPopupShown, setIsPopupShown] = useState<boolean>(false);
     const navigate = useNavigate();
 
     const { data, refetch } = useQuery({
@@ -55,7 +57,7 @@ const SearchBar = ({onSearch}: SearchBarProps) => {
 
     const handleSearch = useCallback(() => {
         if (searchTerm.trim() === '') {
-            alert("Ikke et gyldig sted i Norge");
+            showPopup();
         } else {
             setShowDropdown(false);
             if (onSearch) onSearch();
@@ -70,7 +72,7 @@ const SearchBar = ({onSearch}: SearchBarProps) => {
             if (selectedOptionIndex >= 0) {
                 const selectedItem = data?.navn[selectedOptionIndex];
                 navigate(`/location/${selectedItem?.stedsnavn?.[0]?.skrivemåte}/${selectedItem?.stedsnummer}`);
-            } else if (searchTerm.trim() !== '') {
+            } else {
                 handleSearch();
             }
         } else if (['ArrowUp', 'ArrowDown'].includes(event.key) && showDropdown) {
@@ -84,8 +86,17 @@ const SearchBar = ({onSearch}: SearchBarProps) => {
         }
     };
 
+    const showPopup = () => {
+        setIsPopupShown(true);
+
+        setTimeout(() => {
+            setIsPopupShown(false);
+        }, 1500);
+    };
+
     return (
         <div className='searchContainer' ref={searchBarRef}>
+            <Popup text={'🔍 Skriv inn et søkeord'} show={isPopupShown} />
             <div
                 className="searchBar"
                 style={{
