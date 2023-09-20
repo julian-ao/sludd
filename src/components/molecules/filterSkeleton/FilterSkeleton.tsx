@@ -48,7 +48,12 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
 
     return (
         <div className="filter_container" ref={filterRef}>
-            <div className="filter_box" onClick={() => setVisible(!visible)}>
+            <div
+                className="filter_box"
+                role="filter_box"
+                aria-label="click me!"
+                onClick={() => setVisible(!visible)}
+            >
                 <div
                     className="filter_title"
                     style={{
@@ -76,6 +81,7 @@ const FilterSkeleton = (props: FilterSkeletonProps) => {
                 </div>
                 <div
                     className="filter_values_container"
+                    role="filter_values_container"
                     style={{
                         visibility: visible ? 'visible' : 'hidden',
                         height: visible ? 'auto' : 0,
