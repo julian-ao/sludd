@@ -36,9 +36,16 @@
     text-align: center;
     color: white;
     margin-bottom: 20px;
-    margin-top: 40px;
+    margin-top: 5rem;
     font-weight: 700;
     width: 80%;
+}
+
+.noFavoritesText {
+    color: #888;
+    font-size: 20px;
+    padding: 0 0.5rem;
+    text-align: center;
 }
 
 /* Mobile-view */
@@ -50,5 +57,8 @@
     .greetingHeader {
         font-size: 40px; /* Juster denne verdien etter behov */
         text-align: center !important; /* Dette vil sikre at teksten alltid er midtstilt, selv om en annen stil prøver å overstyre den */
+    }
+    .homePageContent {
+        padding-top: 0;
     }
 }
