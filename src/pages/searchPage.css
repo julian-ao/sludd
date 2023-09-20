@@ -1,35 +1,37 @@
 .searchPageContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 6rem;
 }
 
 .searchPageHeaderDiv {
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  position: relative;
-  margin-bottom: 3rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;
+    margin-bottom: 3rem;
 }
 
 .backButtonDiv {
-  position: absolute;
-  left: 10%;
+    position: absolute;
+    left: 10%;
 }
 
 .resultText {
-  color: #888;
-  font-size: 32px;
+    color: #888;
+    font-size: 20px;
+    padding: 0 0.5rem;
+    text-align: center;
 }
 
 @media screen and (max-width: 600px) {
-  .searchPageHeaderDiv {
-    flex-direction: column;
-  }
-  .backButtonDiv {
-    left: 5%;
-    top: -4rem;
-  }
+    .searchPageHeaderDiv {
+        flex-direction: column;
+    }
+    .backButtonDiv {
+        left: 5%;
+        top: -4rem;
+    }
 }
