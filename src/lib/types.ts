@@ -1,3 +1,4 @@
+// Type definitions for the different API responses
 export type LocationQueryData = {
     metadata?: {
         totaltAntallTreff: number;

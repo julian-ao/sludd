@@ -1,13 +1,14 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import './backButton.css';
 
 export type BackButtonProps = {
     to?: string;
-}
+};
 
 const BackButton = ({ to }: BackButtonProps) => {
     const navigate = useNavigate();
 
+    // Navigate back to previous page or to given path
     const handleBackClick = () => {
         if (to) {
             navigate(to);
@@ -20,11 +21,11 @@ const BackButton = ({ to }: BackButtonProps) => {
         <img
             src="/src/assets/arrow.svg"
             alt=""
-            className='back_button'
+            className="back_button"
             style={{ transform: `rotate(90deg)` }}
             onClick={handleBackClick}
         />
     );
-}
+};
 
 export default BackButton;

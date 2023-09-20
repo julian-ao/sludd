@@ -14,13 +14,7 @@ export const API_URL = 'https://ws.geonorge.no/stedsnavn/v1/sted';
 const hitsPerPage = 12;
 
 const SearchPage = () => {
-
     const navigate = useNavigate();
-
-    const handleLogoClick = () => {
-        navigate('/');
-    };
-
     const [searchParams] = useSearchParams();
     const searchTerm = searchParams.get('q') || undefined;
     const [currentPage, setCurrentPage] = useState(1);
@@ -34,6 +28,7 @@ const SearchPage = () => {
             .join('') || '',
     );
 
+    // Types of filters that can be applied
     const filterTypes = [
         'Adressenavn',
         'By',
@@ -47,6 +42,7 @@ const SearchPage = () => {
     const filter =
         'navn.representasjonspunkt,navn.stedsnavn.skrivemåte,navn.navneobjekttype,navn.stedsnummer,navn.kommuner,metadata';
 
+    // Fetch data from API using react-query, based on search term, filtering and pagination
     const { data, isLoading, refetch } = useQuery<LocationQueryData>({
         queryKey: ['locationData', searchTerm],
         queryFn: () =>
@@ -60,11 +56,10 @@ const SearchPage = () => {
             }),
     });
 
+    // Update sessionStorage when filters are applied, then
+    // set currentPage to 1 and refetch data
     useEffect(() => {
-        // update sessionStorage whenever a filter is applied
         window.sessionStorage.setItem('filters', JSON.stringify(filters));
-
-        // Loop through filters and place each filter in setFilterString in this format: "&navneobjekttype=filter"
         const filterStringArray = filters.map(
             (filter) => `&navneobjekttype=${filter.toLowerCase()}`,
         );
@@ -75,22 +70,35 @@ const SearchPage = () => {
         refetch();
     }, [filterString, filters, refetch]);
 
+    // Set maxPage whenever new data is fetched
     useEffect(() => {
         if (data) {
-            setMaxPage(Math.ceil(data?.metadata?.totaltAntallTreff! / hitsPerPage));
+            const totalTreff = data.metadata?.totaltAntallTreff ?? 0;
+            setMaxPage(Math.ceil(totalTreff / hitsPerPage));
         }
     }, [data]);
 
+    // Refetch data when currentPage changes
     useEffect(() => {
         refetch();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage]);
 
-    return (
+    // Navigate to home page when logo is clicked
+    const handleLogoClick = () => {
+        navigate('/');
+    };
 
-        <div className='searchPageContainer'>
-            <img src={SluddLogo} alt="Sludd Logo" id='logo' onClick={handleLogoClick} />
-            <div className='searchPageHeaderDiv'>
-                <div className='backButtonDiv'>
+    return (
+        <div className="searchPageContainer">
+            <img
+                src={SluddLogo}
+                alt="Sludd Logo"
+                id="logo"
+                onClick={handleLogoClick}
+            />
+            <div className="searchPageHeaderDiv">
+                <div className="backButtonDiv">
                     <BackButton to="/" />
                 </div>
                 <SearchBar

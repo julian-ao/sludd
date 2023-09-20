@@ -3,10 +3,9 @@ import { useEffect } from 'react';
 import LocationComponent from './LocationPage';
 
 const LocationPage = () => {
-
-
     const { locationName, slug } = useParams();
 
+    // Set the document title when 'locationName' changes and reset it when the component unmounts.
     useEffect(() => {
         document.title = 'Sludd - ' + locationName || 'Sludd';
         return () => {
@@ -15,7 +14,10 @@ const LocationPage = () => {
     }, [locationName]);
 
     return (
-        <LocationComponent locationName={locationName || ''} locationId={slug ? slug : undefined} />
+        <LocationComponent
+            locationName={locationName || ''}
+            locationId={slug ? slug : undefined}
+        />
     );
 };
 
