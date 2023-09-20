@@ -1,4 +1,7 @@
 export type LocationQueryData = {
+    metadata?: {
+        totaltAntallTreff: number;
+    };
     navn: LocationData[];
 };
 

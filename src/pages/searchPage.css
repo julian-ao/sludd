@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 8rem;
 }
 
-#logo{
+#logo {
     margin: 1.5rem 0 1.5rem;
 }
 
