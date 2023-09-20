@@ -1,6 +1,6 @@
-import "./locationCards.css";
-import LocationCard from "../../molecules/card/LocationCard";
-import { LocationData } from "../../../lib/types";
+import './locationCards.css';
+import LocationCard from '../../molecules/card/LocationCard';
+import { LocationData } from '../../../lib/types';
 
 export type LocationCardsData = {
     locationData: LocationData[];
@@ -12,7 +12,10 @@ const LocationCardsView = (props: LocationCardsData) => {
     return (
         <div className="locationsGrid">
             {locationData.map((location) => (
-                <LocationCard key={location.stedsnummer} locationData={location} />
+                <LocationCard
+                    key={location.stedsnummer}
+                    locationData={location}
+                />
             ))}
         </div>
     );
