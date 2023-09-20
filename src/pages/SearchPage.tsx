@@ -14,7 +14,6 @@ export const API_URL = 'https://ws.geonorge.no/stedsnavn/v1/sted';
 const hitsPerPage = 12;
 
 const SearchPage = () => {
-
     const navigate = useNavigate();
 
     const handleLogoClick = () => {
@@ -82,18 +81,21 @@ const SearchPage = () => {
         }
     }, [data]);
 
-
     useEffect(() => {
         refetch();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage]);
 
     return (
-
-        <div className='searchPageContainer'>
-            <img src={SluddLogo} alt="Sludd Logo" id='logo' onClick={handleLogoClick} />
-            <div className='searchPageHeaderDiv'>
-                <div className='backButtonDiv'>
+        <div className="searchPageContainer">
+            <img
+                src={SluddLogo}
+                alt="Sludd Logo"
+                id="logo"
+                onClick={handleLogoClick}
+            />
+            <div className="searchPageHeaderDiv">
+                <div className="backButtonDiv">
                     <BackButton to="/" />
                 </div>
                 <SearchBar

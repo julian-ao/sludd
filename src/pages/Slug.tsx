@@ -3,8 +3,6 @@ import { useEffect } from 'react';
 import LocationComponent from './LocationPage';
 
 const LocationPage = () => {
-
-
     const { locationName, slug } = useParams();
 
     useEffect(() => {
@@ -15,7 +13,10 @@ const LocationPage = () => {
     }, [locationName]);
 
     return (
-        <LocationComponent locationName={locationName || ''} locationId={slug ? slug : undefined} />
+        <LocationComponent
+            locationName={locationName || ''}
+            locationId={slug ? slug : undefined}
+        />
     );
 };
 

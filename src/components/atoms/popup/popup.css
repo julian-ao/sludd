@@ -7,7 +7,7 @@
     left: 50%;
     width: fit-content;
     height: fit-content;
-    transform: translate(-50%, -150%) scale(.5); /* Start with the popup above the viewport */
+    transform: translate(-50%, -150%) scale(0.5); /* Start with the popup above the viewport */
     transition: transform 0.3s ease-in-out; /* Add a transition for vertical transform */
 }
 

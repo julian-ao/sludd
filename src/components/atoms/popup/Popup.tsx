@@ -6,7 +6,6 @@ export type PopupProps = {
 };
 
 const Popup = (props: PopupProps) => {
-
     return (
         <div className={`popup ${props.show ? 'show' : ''}`}>
             <div className="popup-content">
