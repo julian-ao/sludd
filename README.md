@@ -4,8 +4,6 @@
 
 From the root of the project, run
 
-TODO: er det riktig med pnpm?
-
 1. *pnpm i*
 2. *pnpm dev*
 
@@ -17,7 +15,7 @@ This project is a weather website where the user can search up any place they wi
 
 ### Navigation between resources
 
-When a user is presented with multiple locations, they have the option to scrutinize an individual location by clicking on it. Before the user clicks into an individual location's page, they can access brief real-time weather information. Upon clicking, a full-screen view of the selected location is displayed, incorporating weather information for every hour over the forthcoming 24 hours. For a more comprehensive weather report, users need to click into the page to access detailed weather information. Users can seamlessly navigate between an individual location's page and the previous view by utilizing a dedicated back button.
+When a user is presented with multiple locations, they have the option to be presented with an individual location by clicking on it. Before the user clicks into an individual location's page, they can access brief real-time weather information. Upon clicking, a full-screen view of the selected location is displayed, incorporating weather information for every hour over the forthcoming 24 hours. For a more comprehensive weather report, users need to click into the page to access detailed weather information. Users can seamlessly navigate between an individual location's page and the previous view by utilizing a dedicated back button, in addition to navigating back to the home page by clicking on the logo at the top of the page.
 
 ### Filtering
 
