@@ -184,6 +184,14 @@ To avoid actual data fetches during testing, mocking has been employed. This can
 
 The team has tested the application on different mobile devices that the team has access to. This ensures that the application functions as expected across devices and device-screens.
 
+**User Interaction Tests:**
+  
+The FilterSkeleton test simulates a user click to check if the filter dropdown becomes visible after interaction. This is evident from the line:
+``` ts
+await user.click(screen.getByRole('filter_box', { name: /click me!/i }));
+```
+followed by the expectation that the dropdown's visibility property is set to 'visible'.
+
 ## Linting
 
 ### How linting has been tested
