@@ -5,7 +5,7 @@ import HeartButton from '../components/atoms/heartButton/HeartButton';
 import WeatherIcon from '../components/atoms/icons/WeatherIcon';
 import BackButton from '../components/atoms/backButton/BackButton';
 import SluddLogo from '../assets/sluddLogo.svg';
-import arrow from '../../../assets/arrow.svg';
+import arrow from '../assets/arrow.svg';
 import { useNavigate } from 'react-router-dom';
 
 type LocationPageProps = {
