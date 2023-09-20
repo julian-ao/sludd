@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import SearchBar from '../components/molecules/searchBar/SearchBar';
@@ -7,8 +7,16 @@ import LocationCardsView from '../components/views/locationCardsView/LocationCar
 import FilterSkeleton from '../components/molecules/filterSkeleton/FilterSkeleton';
 import BackButton from '../components/atoms/backButton/BackButton';
 import './searchPage.css';
+import SluddLogo from '../assets/sluddLogo.svg';
 
 const SearchPage = () => {
+
+    const navigate = useNavigate();
+
+    const handleLogoClick = () => {
+        navigate('/');
+    };
+
     const [searchParams] = useSearchParams();
     const searchTerm = searchParams.get('q') || undefined;
 
@@ -49,7 +57,9 @@ const SearchPage = () => {
 
     //TODO: add pagination
     return (
+        
         <div className='searchPageContainer'>
+            <img src={SluddLogo} alt="Sludd Logo" id='logo' onClick={handleLogoClick}/>
             <div className='searchPageHeaderDiv'>
                 <div className='backButtonDiv'>
                     <BackButton to="/" />
