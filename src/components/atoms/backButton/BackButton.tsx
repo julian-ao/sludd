@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import arrow from '../../../assets/arrow.svg';
 import './backButton.css';
 
 export type BackButtonProps = {
@@ -19,7 +20,7 @@ const BackButton = ({ to }: BackButtonProps) => {
 
     return (
         <img
-            src="/src/assets/arrow.svg"
+            src={arrow}
             alt=""
             className="back_button"
             style={{ transform: `rotate(90deg)` }}
