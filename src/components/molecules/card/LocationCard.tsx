@@ -10,7 +10,6 @@ interface LocationCardProps {
 
 const LocationCard = ({ locationData }: LocationCardProps) => {
     const coordinates = locationData.representasjonspunkt;
-    // const weatherQuery = useWeather(coordinates.nord, coordinates.øst);
     const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${coordinates.nord}&lon=${coordinates.øst}`;
     const { data: weatherData, isLoading: weatherIsLoading, isError: weatherIsError } = useQuery<WeatherQueryData>(
         ["weather", coordinates.nord, coordinates.øst],

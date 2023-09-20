@@ -1,16 +1,46 @@
-import { cleanup, render } from '@testing-library/react'
-import SearchBar from './SearchBar'
-import { BrowserRouter } from 'react-router-dom'
+import { cleanup, render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { vi } from 'vitest';
-import { LocationQueryData } from '../../../lib/types';
-import React from 'react';
+import { vi, test, describe } from 'vitest';
+import SearchBar from './SearchBar';
+import userEvent from '@testing-library/user-event';
+
+// Mock the entire @tanstack/react-query module
+vi.mock('@tanstack/react-query', async () => {
+    const actualTanStack = await vi.importActual('@tanstack/react-query');
+    return {
+        ...(typeof actualTanStack === 'object' && actualTanStack !== null ? actualTanStack : {}),
+        showDropdown: true,
+        useQuery: vi.fn().mockReturnValue({
+            data: {
+                navn: [
+                    {
+                        stedsnavn: [
+                            {
+                                skrivemåte: 'Oslo',
+                            },
+                        ],
+                        stedsnummer: '1',
+                        navneobjekttype: 'By',
+                        kommuner: [
+                            {
+                                kommunenummer: '0301',
+                                kommunenavn: 'Oslo',
+                            },
+                        ],
+                    },
+                ],
+            },
+        }),
+    };
+});
+
 
 const wrapper = ({ children }: React.PropsWithChildren<object>) => (
     <BrowserRouter>
         {children}
     </BrowserRouter>
-)
+);
 
 describe('SearchBar', () => {
     let queryClient: QueryClient;
@@ -24,40 +54,21 @@ describe('SearchBar', () => {
         cleanup();
     });
 
-    it('should render correctly', async () => {
-        const mockResponse = {
-            navn: [
-                {
-                    representasjonspunkt: {
-                        nord: 1,
-                        øst: 1,
-                    },
-                    stedsnavn: [
-                        {
-                            skrivemåte: 'Oslo',
-                        },
-                    ],
-                    stedsnummer: '1',
-                    kommuner: [
-                        {
-                            kommunenummer: '1',
-                            kommunenavn: 'Oslo',
-                        },
-                    ],
-                },
-            ],
-        } as LocationQueryData;
-        vi.spyOn(global, 'fetch').mockResolvedValueOnce({
-            json: vi.fn().mockResolvedValueOnce(mockResponse),
-        } as never);
-
+    test('render SearchBar with mock response', async () => {
 
         const { container } = render(
             <QueryClientProvider client={queryClient}>
                 <SearchBar />
             </QueryClientProvider>,
-            { wrapper },
+            { wrapper }
         );
+        // Simulate user typing a search term
+        const input = screen.getByPlaceholderText('Søk på et sted i Norge...');
+        userEvent.type(input, 'Oslo');
+
+        //TODO: test that the dropdown is shown and response is correct with mock
+
         expect(container).toMatchSnapshot();
     });
-});
+
+})
