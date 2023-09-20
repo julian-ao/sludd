@@ -1,3 +1,4 @@
+// Convert date to readable format
 export const convertDateToReadable = (date: string) => {
     const month = date.slice(5, 7);
     const day = parseInt(date.slice(8, 10), 10).toString(); // Remove leading zero

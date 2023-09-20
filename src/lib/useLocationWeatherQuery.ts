@@ -12,11 +12,14 @@ interface locationId {
     filter?: string;
 }
 
+// Custom hook for fetching weather data based on locationName or locationId
 export const useLocationWeatherQuery = (data: locationName | locationId) => {
 
     const [locationData, setLocationData] = useState<LocationQueryData | null>(
         null,
     );
+
+    // Fetch location data (cordinates) based on locationName or locationId
     const locationQuery = useQuery<LocationQueryData, unknown>(
         ["location", data],
         async () => {
@@ -38,12 +41,14 @@ export const useLocationWeatherQuery = (data: locationName | locationId) => {
         },
     );
 
+    // Set locationData when locationQuery is successful
     useEffect(() => {
         if (locationQuery.isSuccess) {
             setLocationData(locationQuery.data!);
         }
     }, [locationQuery]);
 
+    // Fetch weather data based on cords from locationData
     const weatherQuery = useQuery<WeatherQueryData, unknown>(
         ["weather", locationData?.navn[0].representasjonspunkt, location],
         async () => {

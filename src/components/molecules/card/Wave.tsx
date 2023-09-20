@@ -1,15 +1,14 @@
-import { CSSProperties } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
+import { CSSProperties } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 type WaveProps = {
-    color: CSSProperties["color"];
-    animationDuration: CSSProperties["animationDuration"];
-    animationDirection?: CSSProperties["animationDirection"];
-    opacity: CSSProperties["opacity"];
+    color: CSSProperties['color'];
+    animationDuration: CSSProperties['animationDuration'];
+    animationDirection?: CSSProperties['animationDirection'];
+    opacity: CSSProperties['opacity'];
 };
 
 const AnimatedWave = ({ color, ...props }: WaveProps) => {
-
     const wave = (
         <svg viewBox="0 0 1000 126" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -26,12 +25,14 @@ const AnimatedWave = ({ color, ...props }: WaveProps) => {
         <div
             style={{
                 background: `url('data:image/svg+xml;utf8,${encodedWaveSvg}')`,
-                position: "relative",
+                position: 'relative',
                 bottom: 0,
-                width: "100%",
+                width: '100%',
                 height: `${Math.floor(Math.random() * (38 - 25 + 1)) + 25}px`,
-                backgroundSize: "300px 40px",
-                animation: `wave ${props.animationDuration} linear infinite ${props.animationDirection || "normal"}`,
+                backgroundSize: '300px 40px',
+                animation: `wave ${props.animationDuration} linear infinite ${
+                    props.animationDirection || 'normal'
+                }`,
                 opacity: props.opacity,
             }}
         />
