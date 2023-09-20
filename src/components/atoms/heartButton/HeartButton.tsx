@@ -45,7 +45,7 @@ const HeartButton = (props: HeartButtonProps) => {
     };
 
     return (
-        <div>
+        <div className='heart-button'>
             <div className='heart_div' onClick={toggleFavorite}>
                 <img
                     className='solid'
