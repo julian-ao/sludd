@@ -4,13 +4,22 @@ import { convertDateToReadable } from '../lib/utils';
 import HeartButton from '../components/atoms/heartButton/HeartButton';
 import WeatherIcon from '../components/atoms/icons/WeatherIcon';
 import BackButton from '../components/atoms/backButton/BackButton';
+import SluddLogo from '../assets/sluddLogo.svg';
+import { useNavigate } from 'react-router-dom';
 
 type LocationPageProps = {
     locationName: string;
     locationId?: string;
 };
 
+
 const LocationPage = ({ locationName, locationId }: LocationPageProps) => {
+
+    const navigate = useNavigate();
+
+    const handleLogoClick = () => {
+        navigate('/');
+    };
 
     //if locationId is undefined, use locationName to get location weather data
     //if locationId is defined, use locationId to get location weather data
@@ -37,9 +46,9 @@ const LocationPage = ({ locationName, locationId }: LocationPageProps) => {
         return date >= currentDate && date < endDate;
     });
 
-
     return (
         <div className='location_main'>
+            <img src={SluddLogo} alt="Sludd Logo" id='logo' onClick={handleLogoClick}/>
             <div className='location_content'>
                 <div className='location_header_top'>
                     <BackButton />
