@@ -184,6 +184,12 @@ To avoid actual data fetches during testing, mocking has been employed. This can
 
 The team has tested the application on different mobile devices that the team has access to. This ensures that the application functions as expected across devices and device-screens.
 
+## Linting
+
+### How linting has been tested
+
+We maintain code quality and consistency using ESLint. Our configuration in .eslintrc.cjs enforces best practices for TypeScript. It includes rules for the browser environment, React, and TypeScript. Custom rules, like "react-refresh/only-export-components," ensure code correctness. We run linting with pnpm lint to ensure high-quality code throughout the development process.
+
 ## Commit message template
 
 We used the following commit message template for all commits when contributing to the project.
