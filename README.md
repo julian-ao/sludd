@@ -157,11 +157,32 @@ The project is designed to be responsive and functions well on both desktop and 
 
 ### How to run tests
 
-TODO
+`pnpm test`
 
 ### What has been tested
 
-TODO
+**Demonstrating Snapshot Testing:**
+For several components, such as HeartButton, WeatherIcon, Popup, LocationCard, FilterSkeleton, and SearchBar, snapshot testing has been performed. This method ensures that the user interface does not change unexpectedly. By using;
+
+```ts
+expect(container).toMatchSnapshot();
+```
+
+the current rendering of the component is compared to a previously stored "snapshot" to identify any changes.
+
+**Testing Custom Components:**
+
+- Testing based on props and state: For instance, in the HeartButton and FilterSkeleton tests, the components are rendered with different props to ensure they behave as expected.
+
+- User Interaction: In the FilterSkeleton test, there's a test that simulates a user click to check that the filter dropdown is displayed upon interaction.
+
+**Use of Mocking to Prevent Data Fetching:**
+
+To avoid actual data fetches during testing, mocking has been employed. This can be seen in the LocationCard and SearchBar tests where the `@tanstack/react-query` module is mocked to return predetermined data.
+
+**Testing on Mainstream Browsers and Mobile Devices:**
+
+The team has tested the application on different mobile devices that the team has access to. This ensures that the application functions as expected across devices and device-screens.
 
 ## Commit message template
 
