@@ -62,3 +62,10 @@
         padding-top: 0;
     }
 }
+
+.homePageHint {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 300;
+    color: #777;
+}

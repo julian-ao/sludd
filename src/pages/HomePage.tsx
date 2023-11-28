@@ -45,6 +45,9 @@ export default function HomePage() {
             <div className="homePageContent">
                 <img src={SluddLogo} alt="Sludd Logo" />
                 <h1 className="greetingHeader">{greeting}</h1>
+                <h3 className="homePageHint">
+                    Skriv inn et søkeord og trykk 'Enter' for å søke
+                </h3>
                 <SearchBar />
                 <div className="favoritesHeader">Favoritter</div>
                 {favoriteLocations.length === 0 ? (
