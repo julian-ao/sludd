@@ -2,14 +2,16 @@ import { cleanup, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { vi, test, describe } from 'vitest';
-import SearchBar from './SearchBar';
+import SearchBar from '../components/molecules/searchBar/SearchBar';
 import userEvent from '@testing-library/user-event';
 
 // Mock the entire @tanstack/react-query module
 vi.mock('@tanstack/react-query', async () => {
     const actualTanStack = await vi.importActual('@tanstack/react-query');
     return {
-        ...(typeof actualTanStack === 'object' && actualTanStack !== null ? actualTanStack : {}),
+        ...(typeof actualTanStack === 'object' && actualTanStack !== null
+            ? actualTanStack
+            : {}),
         showDropdown: true,
         useQuery: vi.fn().mockReturnValue({
             data: {
@@ -35,11 +37,8 @@ vi.mock('@tanstack/react-query', async () => {
     };
 });
 
-
 const wrapper = ({ children }: React.PropsWithChildren<object>) => (
-    <BrowserRouter>
-        {children}
-    </BrowserRouter>
+    <BrowserRouter>{children}</BrowserRouter>
 );
 
 describe('SearchBar', () => {
@@ -55,12 +54,11 @@ describe('SearchBar', () => {
     });
 
     test('render SearchBar with mock response', async () => {
-
         const { container } = render(
             <QueryClientProvider client={queryClient}>
                 <SearchBar />
             </QueryClientProvider>,
-            { wrapper }
+            { wrapper },
         );
         // Simulate user typing a search term
         const input = screen.getByPlaceholderText('Søk på et sted i Norge...');
@@ -70,5 +68,4 @@ describe('SearchBar', () => {
 
         expect(container).toMatchSnapshot();
     });
-
-})
+});

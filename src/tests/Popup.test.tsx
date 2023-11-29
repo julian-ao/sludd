@@ -1,6 +1,6 @@
 import { cleanup, render } from '@testing-library/react';
 import { afterEach } from 'vitest';
-import Popup from './Popup';
+import Popup from '../components/atoms/popup/Popup';
 
 afterEach(() => {
     cleanup();
@@ -8,10 +8,7 @@ afterEach(() => {
 
 describe('Popup', () => {
     it('should render correctly', () => {
-        const { container } = render(<Popup
-            text="test"
-            show={true}
-        />);
+        const { container } = render(<Popup text="test" show={true} />);
         expect(container).toMatchSnapshot();
     });
 });
