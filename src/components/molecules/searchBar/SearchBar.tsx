@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { LocationQueryData } from '../../../lib/types';
 import './searchBar.css';
 import Popup from '../../atoms/popup/Popup';
+import { useLocation } from 'react-router-dom';
 
 export const API_URL = 'https://ws.geonorge.no/stedsnavn/v1/sted';
 
@@ -20,6 +21,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
     const [lastKeyPressed, setLastKeyPressed] = useState<string>('');
     const [isPopupShown, setIsPopupShown] = useState<boolean>(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     // Fetch data from API based on search term, with fuzzy search true and hit limit 7
     const { data, refetch } = useQuery({
@@ -48,6 +50,15 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchTerm]);
+
+    useEffect(() => {
+        // Extract query from URL
+        const queryParams = new URLSearchParams(location.search);
+        const query = queryParams.get('q');
+        if (query) {
+            setSearchTerm(query);
+        }
+    }, []);
 
     // Handle click outside of search bar and set showDropdown false
     const handleClickOutside = useCallback((event: MouseEvent) => {
@@ -133,7 +144,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
                         showDropdown && data?.navn?.length > 0 ? 0 : '10px',
                 }}
             >
-                <div className='searchBarIcon'>
+                <div className="searchBarIcon">
                     <FaMapMarkerAlt
                         size={18}
                         color="#999"

@@ -4,8 +4,8 @@
 
 From the root of the project, run
 
-1. *pnpm i*
-2. *pnpm dev*
+1. _pnpm i_
+2. _pnpm dev_
 
 ## Documentation
 
@@ -33,31 +33,32 @@ React state is used to manage dynamic data and user interactions. Props are empl
 
 **Examples:**
 
-- The *LocationCard* component receives *locationData* as a prop. This data provides the component with the necessary information about a location, which it then uses to display relevant details and fetch weather data.
+-   The _LocationCard_ component receives _locationData_ as a prop. This data provides the component with the necessary information about a location, which it then uses to display relevant details and fetch weather data.
 
-    ``` html
-    <LocationCard locationData={someLocationData} />
+    ```html
+    <LocationCard locationData="{someLocationData}" />
     ```
 
-- The *HomePage* component uses the useState hook to manage its own local state. Two pieces of state are maintained:
-  - *greeting*: Determines the greeting message based on the time of day.
-  - *favoriteLocations*: Stores an array of user's favorite locations.
+-   The _HomePage_ component uses the useState hook to manage its own local state. Two pieces of state are maintained:
 
-    ``` javascript
-    const [greeting, setGreeting] = useState('');
-    const [favoriteLocations, setFavoriteLocations] = useState([]);
+    -   _greeting_: Determines the greeting message based on the time of day.
+    -   _favoriteLocations_: Stores an array of user's favorite locations.
 
-    const getGreeting = () => {
-        ...
-        setGreeting(greetings[greetingIndex]);
-    };
+        ```javascript
+        const [greeting, setGreeting] = useState('');
+        const [favoriteLocations, setFavoriteLocations] = useState([]);
 
-    useEffect(() => {
-        getGreeting();
-        const favoriteLocations = localStorage.getItem('favorites');
-        favoriteLocations && setFavoriteLocations(JSON.parse(favoriteLocations));
-    }, []);
-    ```
+        const getGreeting = () => {
+            ...
+            setGreeting(greetings[greetingIndex]);
+        };
+
+        useEffect(() => {
+            getGreeting();
+            const favoriteLocations = localStorage.getItem('favorites');
+            favoriteLocations && setFavoriteLocations(JSON.parse(favoriteLocations));
+        }, []);
+        ```
 
 ### REST API and TanStack Query
 
@@ -66,27 +67,32 @@ We fetch data from two different REST APIs using TanStack Query to ensure effici
 
 **Examples:**
 
-- *SearchPage* component:
-  - Purpose: This component allows users to search for specific locations.
-  - Data Fetching: It uses a search parameter (from the URL) to retrieve location data from `ws.geonorge.no`.
-  - Example usage:
+-   _SearchPage_ component:
 
-   ``` typescript
-    const { data, isLoading, refetch } = useQuery<LocationQueryData>({
-        queryKey: ["locationData", searchTerm],
-        queryFn: () => fetch(`https://ws.geonorge.no/stedsnavn/v1/sted?sok=${searchTerm}${filterString}&fuzzy=true&...`
-        ...
+    -   Purpose: This component allows users to search for specific locations.
+    -   Data Fetching: It uses a search parameter (from the URL) to retrieve location data from `ws.geonorge.no`.
+    -   Example usage:
+
+    ```typescript
+     const { data, isLoading, refetch } = useQuery<LocationQueryData>({
+         queryKey: ["locationData", searchTerm],
+         queryFn: () => fetch(`https://ws.geonorge.no/stedsnavn/v1/sted?sok=${searchTerm}${filterString}&fuzzy=true&...`
+         ...
+     });
+    ```
+
+-   _useLocationWeatherQuery_ custom hook:
+
+    -   Purpose: This hook is designed to fetch both location and weather data based on either a location name or a location ID.
+    -   Data Fetching: Depending on the input (location name), it fetches data first from `ws.geonorge.no` for location coordinate details, and then `api.met.no` for weather details.
+    -   Example usage:
+
+    ```typescript
+    const { locationData, weatherQuery } = useLocationWeatherQuery({
+        locationName: locationName,
+        locationId: locationId,
     });
-   ```
-
-- *useLocationWeatherQuery* custom hook:
-  - Purpose: This hook is designed to fetch both location and weather data based on either a location name or a location ID.
-  - Data Fetching: Depending on the input (location name), it fetches data first from `ws.geonorge.no` for location coordinate details, and then `api.met.no` for weather details.
-  - Example usage:
-
-   ``` typescript
-   const { locationData, weatherQuery } = useLocationWeatherQuery({ locationName: locationName, locationId: locationId });
-   ```
+    ```
 
 By utilizing TanStack Query, these components and hooks efficiently fetch, cache, and update data, ensuring a smooth user experience.
 
@@ -97,25 +103,27 @@ We leverage the HTML Web Storage API, specifically localStorage and sessionStora
 
 **Examples**:
 
-- Using localStorage in HomePage:
-  - Purpose: The HomePage component uses localStorage to store and retrieve users' favorite locations. This ensures that users' favorite locations persist across browser sessions, providing a personalized experience every time they visit the page.
-  - Implementation to retrieve favourite locations:
+-   Using localStorage in HomePage:
 
-   ``` ts
-   useEffect(() => {
-        ...
-        const favoriteLocations = localStorage.getItem('favorites');
-        favoriteLocations && setFavoriteLocations(JSON.parse(favoriteLocations));
-    }, []);
-   ```
+    -   Purpose: The HomePage component uses localStorage to store and retrieve users' favorite locations. This ensures that users' favorite locations persist across browser sessions, providing a personalized experience every time they visit the page.
+    -   Implementation to retrieve favourite locations:
 
-- Using sessionStorage for Filters:
-  - Purpose: sessionStorage is used to temporarily store filter preferences for the duration of a page session. This ensures that users' filter preferences are remembered as they navigate through the site, but these preferences are not persisted across browser sessions.
-  - Implementation of retrieving filters:
+    ```ts
+    useEffect(() => {
+         ...
+         const favoriteLocations = localStorage.getItem('favorites');
+         favoriteLocations && setFavoriteLocations(JSON.parse(favoriteLocations));
+     }, []);
+    ```
 
-   ```ts
-   const storedFilters = window.sessionStorage.getItem("filters");
-   ```
+-   Using sessionStorage for Filters:
+
+    -   Purpose: sessionStorage is used to temporarily store filter preferences for the duration of a page session. This ensures that users' filter preferences are remembered as they navigate through the site, but these preferences are not persisted across browser sessions.
+    -   Implementation of retrieving filters:
+
+    ```ts
+    const storedFilters = window.sessionStorage.getItem('filters');
+    ```
 
 By utilizing the HTML Web Storage API, we can enhance the user experience by remembering their preferences and actions, making the application more intuitive and user-friendly.
 
@@ -126,10 +134,10 @@ React Router is employed to manage navigation and routing within the application
 
 **Implementation:**
 
-- Home Page (/): When users visit the root URL, they are presented with the HomePage component.
-- Search Page (/search): Users can navigate to the search page to perform searches, which displays the SearchPage component.
-- Location Information Page (/location/:locationName/:slug?): This route is used to display detailed information about a specific location based on locationName. The optional slug parameter can be used for further specification or filtering, displaying the LocationPage component.
-- Not Found Page (*): If users navigate to a URL not defined in our routes, they are presented with the NotFoundPage component, where they can easily navigate back to the home page.
+-   Home Page (/): When users visit the root URL, they are presented with the HomePage component.
+-   Search Page (/search): Users can navigate to the search page to perform searches, which displays the SearchPage component.
+-   Location Information Page (/location/:locationName/:slug?): This route is used to display detailed information about a specific location based on locationName. The optional slug parameter can be used for further specification or filtering, displaying the LocationPage component.
+-   Not Found Page (\*): If users navigate to a URL not defined in our routes, they are presented with the NotFoundPage component, where they can easily navigate back to the home page.
 
 ```html
 <Routes>
@@ -147,11 +155,11 @@ The project is designed to be responsive and functions well on both desktop and 
 
 **Techniques:**
 
-- We use media queries to adjust styles for different screen widths. For instance, the `.location_content` class has different styles for devices with widths up to 1250px and 500px. Similarly, the `.searchContainer` class adjusts its width based on whether the device width is 600px or between 601px and 1024px.
-- Classes like `.location_header`, `.location_header_top`, and `.location_header_info` utilize flexbox to space out their child elements and adjust their layout based on screen size.
-- The `.location_main` class uses 100vw for its width, ensuring it spans the full viewport width. The `.location_content` class uses percentages (90%) for its width, ensuring it takes up a relative portion of its container.
-- The `.location_content` class has a max-width of 1000px, ensuring that on larger screens, the content doesn't stretch too wide.
-- The `.hidden_column` class is set to display: none for devices with a width up to 1250px, ensuring that certain columns are hidden for a cleaner look on smaller screens.
+-   We use media queries to adjust styles for different screen widths. For instance, the `.location_content` class has different styles for devices with widths up to 1250px and 500px. Similarly, the `.searchContainer` class adjusts its width based on whether the device width is 600px or between 601px and 1024px.
+-   Classes like `.location_header`, `.location_header_top`, and `.location_header_info` utilize flexbox to space out their child elements and adjust their layout based on screen size.
+-   The `.location_main` class uses 100vw for its width, ensuring it spans the full viewport width. The `.location_content` class uses percentages (90%) for its width, ensuring it takes up a relative portion of its container.
+-   The `.location_content` class has a max-width of 1000px, ensuring that on larger screens, the content doesn't stretch too wide.
+-   The `.hidden_column` class is set to display: none for devices with a width up to 1250px, ensuring that certain columns are hidden for a cleaner look on smaller screens.
 
 ## Testing
 
@@ -172,9 +180,9 @@ the current rendering of the component is compared to a previously stored "snaps
 
 **Testing Custom Components:**
 
-- Testing based on props and state: For instance, in the HeartButton and FilterSkeleton tests, the components are rendered with different props to ensure they behave as expected.
+-   Testing based on props and state: For instance, in the HeartButton and FilterSkeleton tests, the components are rendered with different props to ensure they behave as expected.
 
-- User Interaction: In the FilterSkeleton test, there's a test that simulates a user click to check that the filter dropdown is displayed upon interaction.
+-   User Interaction: In the FilterSkeleton test, there's a test that simulates a user click to check that the filter dropdown is displayed upon interaction.
 
 **Use of Mocking to Prevent Data Fetching:**
 
@@ -185,12 +193,18 @@ To avoid actual data fetches during testing, mocking has been employed. This can
 The team has tested the application on different mobile devices that the team has access to. This ensures that the application functions as expected across devices and device-screens.
 
 **User Interaction Tests:**
-  
+
 The FilterSkeleton test simulates a user click to check if the filter dropdown becomes visible after interaction. This is evident from the line:
-``` ts
+
+```ts
 await user.click(screen.getByRole('filter_box', { name: /click me!/i }));
 ```
+
 followed by the expectation that the dropdown's visibility property is set to 'visible'.
+
+## Integration of Feedback
+
+Following valuable feedback gathered through the peer evaluations, we've implemented key improvements to the project. Many users initially had difficulty finding the filtering and search functions within the app. To resolve this, we added explanatory text on the homepage, guiding users more effectively. Additionally, in response to user requests, we ensured that search terms remain visible in the search bar for convenience. Lastly, we reorganized our codebase by moving all tests into a separate test folder, creating a cleaner and more structured environment as suggested by our peers. These enhancements not only streamline user experience but also reflect our commitment to ongoing refinement based on user feedback.
 
 ## Linting
 
@@ -214,10 +228,10 @@ Explain how the commit addresses the issue
 
 The `<type>` can be one of the following:
 
-- `feat`     (new feature)
-- `fix`      (bug fix)
-- `refactor` (refactoring production code)
-- `style`    (formatting, missing semicolons, etc; no code change)
-- `docs`     (changes to documentation)
-- `test`     (adding or refactoring tests; no production code change)
-- `chore`    (updating grunt tasks, etc; no production code change)
+-   `feat` (new feature)
+-   `fix` (bug fix)
+-   `refactor` (refactoring production code)
+-   `style` (formatting, missing semicolons, etc; no code change)
+-   `docs` (changes to documentation)
+-   `test` (adding or refactoring tests; no production code change)
+-   `chore` (updating grunt tasks, etc; no production code change)
